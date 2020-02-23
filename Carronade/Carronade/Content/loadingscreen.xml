@@ -56,4 +56,8 @@
 			</Animation>
 		</Animations>
 	</AnimationSet>
+	<Image>
+		<name>testenemy</name>
+		<id>3</id>
+	</Image>
 </asset>

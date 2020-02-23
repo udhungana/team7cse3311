@@ -41,7 +41,8 @@ namespace Carronade {
 			graphics.PreferredBackBufferWidth = 80 * 16;
 			graphics.PreferredBackBufferHeight = 60 * 16;
 			graphics.ApplyChanges();
-			actors.Add(new Loading_Actor(0,0,0));
+			actors.Add(new LoadingActor(0,0,0));
+			actors.Add(new TestEnemyActor(500, 500, 90));
 		}
 
 		/// <summary>
