@@ -60,4 +60,8 @@
 		<name>testenemy</name>
 		<id>3</id>
 	</Image>
+	<Image>
+		<name>testplayer</name>
+		<id>4</id>
+	</Image>
 </asset>

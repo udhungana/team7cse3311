@@ -45,6 +45,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Actors\BaseActors\KinematicActor.cs" />
+    <Compile Include="Scripts\Actors\EnemyActors\TestPlayerActor.cs" />
     <Compile Include="Scripts\Actors\EnemyActors\TestEnemyActor.cs" />
     <Compile Include="Scripts\Actors\EnemyActors\LoadingActor.cs" />
     <Compile Include="Scripts\Asset\Asset.cs" />

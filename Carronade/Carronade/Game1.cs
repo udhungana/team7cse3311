@@ -43,6 +43,7 @@ namespace Carronade {
 			graphics.ApplyChanges();
 			actors.Add(new LoadingActor(0,0,0));
 			actors.Add(new TestEnemyActor(500, 500, 90));
+			actors.Add(new TestPlayerActor(600, 600, 0));
 		}
 
 		/// <summary>
