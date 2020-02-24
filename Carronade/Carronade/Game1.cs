@@ -13,14 +13,29 @@ namespace Carronade {
 		SpriteBatch spriteBatch;
 		XMLAssetBuilder builder;
 		public static Game1 mainGame;
-		public List<Sprite> drawSprites;
+
 		public List<Actor> actors;
+		public List<Actor> actorAddQueue;
+		public List<Actor> actorDeleteQueue;
+		public bool actorQueueUpdated = false;
+
+		public List<Sprite> drawSprites;
+		public List<Sprite> spriteAddQueue;
+		public bool spriteQueueUpdated = false;
+
 		public bool unpaused = true;
+
+
 		public Game1() {
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
-			drawSprites = new List<Sprite>();
 			actors = new List<Actor>();
+			actorAddQueue = new List<Actor>();
+			actorDeleteQueue = new List<Actor>();
+
+			drawSprites = new List<Sprite>();
+			spriteAddQueue = new List<Sprite>();
+
 			builder = new XMLAssetBuilder(Content);
 			if (mainGame == null) {
 				mainGame = this;
@@ -41,9 +56,9 @@ namespace Carronade {
 			graphics.PreferredBackBufferWidth = 80 * 16;
 			graphics.PreferredBackBufferHeight = 60 * 16;
 			graphics.ApplyChanges();
-			actors.Add(new LoadingActor(0,0,0));
-			actors.Add(new TestEnemyActor(500, 500, 90));
-			actors.Add(new TestPlayerActor(600, 600, 0));
+			//actors.Add(new LoadingActor(0,0,0));
+			AddActor(new TestPlayerActor(600, 600, 0));
+			AddActor(new TestCanonActor(0, 0, 0));
 		}
 
 		/// <summary>
@@ -56,8 +71,16 @@ namespace Carronade {
 
 			// TODO: use this.Content to load your game content here
 			builder.LoadAssets("loadingscreen");
+			builder.LoadAssets("canon");
 		}
-
+		public void AddActor(Actor act) {
+			actorAddQueue.Add(act);
+			actorQueueUpdated = true;
+		}
+		public void RemoveActor(Actor act) {
+			actorDeleteQueue.Add(act);
+			actorQueueUpdated = true;
+		}
 		/// <summary>
 		/// UnloadContent will be called once per game and is the place to unload
 		/// game-specific content.
@@ -74,7 +97,19 @@ namespace Carronade {
 		protected override void Update(GameTime gameTime) {
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
-			if(unpaused) {
+			if (actorQueueUpdated) {
+				foreach (var actor in actorAddQueue) {
+					actors.Add(actor);
+					actor.Initialize();
+				}
+				foreach(var actor in actorDeleteQueue) {
+					actors.Remove(actor);
+				}
+				actorAddQueue.Clear();
+				actorDeleteQueue.Clear();
+				actorQueueUpdated = false;
+			}
+			if (unpaused) {
 				foreach (var actor in actors) {
 					actor.Update(gameTime);
 				}

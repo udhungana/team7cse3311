@@ -31,7 +31,7 @@ namespace Carronade {
 		public override void Update(GameTime gameTime) {
 			Vector2 deltaVel = new Vector2(velocity.X * (float) gameTime.ElapsedGameTime.TotalSeconds, velocity.Y * (float) gameTime.ElapsedGameTime.TotalSeconds);
 			position += deltaVel;
-			Console.WriteLine(string.Format("{0} : {1} - {2}", position, velocity, deltaVel));
+			//Console.WriteLine(string.Format("{0} : {1} - {2}", position, velocity, deltaVel));
 		}
 	}
 }

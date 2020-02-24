@@ -38,5 +38,11 @@ namespace Carronade {
 			loadingImage.Draw(canvas, imgPos, rotation);
 			testAnim.Draw(canvas, Vector2.Zero, 0);
 		}
+		public override Vector2 GetCenterPosition() {
+			return GetPosition();
+		}
+		public override Vector2 GetPosition() {
+			return position;
+		}
 	}
 }

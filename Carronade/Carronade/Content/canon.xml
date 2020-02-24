@@ -1,0 +1,21 @@
+<asset>
+	<AnimationSet>
+		<name>testcanon</name>
+		<id>100</id>
+		<width>256</width>
+		<height>256</height>
+		<default>idle</default>
+		<Animations>
+			<Animation>
+				<name>idle</name>
+				<start>0</start>
+				<end>0</end>
+			</Animation>
+			<Animation>
+				<name>firing</name>
+				<start>0</start>
+				<end>3</end>
+			</Animation>
+		</Animations>
+	</AnimationSet>
+</asset>

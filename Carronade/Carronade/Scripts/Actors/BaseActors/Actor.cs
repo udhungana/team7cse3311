@@ -9,8 +9,7 @@ namespace Carronade {
 		protected float rotation;
 		protected float layer;
 		protected Actor() {
-			Initialize();
-			System.Console.WriteLine("Actor Created at {0} r:{1}", position, rotation);
+			//System.Console.WriteLine("Actor Created at {0} r:{1}", position, rotation);
 		}
 		public Actor(float x, float y, float r) {
 			position = new Vector2(x, y);
@@ -28,6 +27,8 @@ namespace Carronade {
 		public abstract void Update(GameTime gameTime);
 		//All actors will have a draw function but not every actor will necessarily use this.
 		public abstract void Draw(SpriteBatch canvas);
+		public abstract Vector2 GetPosition();
+		public abstract Vector2 GetCenterPosition();
 	}
 }
  

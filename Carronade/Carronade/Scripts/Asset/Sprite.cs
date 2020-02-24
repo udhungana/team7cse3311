@@ -25,6 +25,9 @@ namespace Carronade {
 			Vector2 center = new Vector2(text.Width / 2, text.Height / 2);
 			canvas.Draw(text, position + center, null, Color.White, rotation, center, 1.0f, SpriteEffects.None, layer);
 		}
-
+		public virtual void DrawCentered(SpriteBatch canvas, Vector2 position, float rotation) {
+			Vector2 center = new Vector2(text.Width / 2, text.Height / 2);
+			canvas.Draw(text, position, null, Color.White, rotation, center, 1.0f, SpriteEffects.None, layer);
+		}
 	}
 }

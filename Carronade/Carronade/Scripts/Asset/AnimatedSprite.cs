@@ -5,7 +5,7 @@ using System;
 namespace Carronade {
 	public class AnimatedSprite : Sprite {
 		//We don't want our animations to actually run at framerate, so we triple the duration a given frame.
-		public static readonly int ANIMATION_HANGTIME = 3;
+		public static readonly int ANIMATION_HANGTIME = 5;
 		private Animations anim;
 		private int currentFrame = 0;
 		private int maxFrames = 0;
@@ -18,9 +18,15 @@ namespace Carronade {
 
 		//We reset the animation state for each animation
 		public void SetAnimation(string animName) {
+			if(!animName.Equals(currentAnimation)) {
+				currentFrame = 0;
+				currentAnimation = animName;
+				maxFrames = anim.GetAnimationLength(animName) * ANIMATION_HANGTIME;
+				SetFrame(0);
+			}
+		}
+		public void ResetAnimation() {
 			currentFrame = 0;
-			currentAnimation = animName;
-			maxFrames = anim.GetAnimationLength(animName) * ANIMATION_HANGTIME;
 			SetFrame(0);
 		}
 		//This let's us loop through animations though that does give an important TODO...
@@ -43,9 +49,16 @@ namespace Carronade {
 		}
 		//Draws the current frame and increments the frame counter by one.
 		public override void Draw(SpriteBatch canvas, Vector2 position, float rotation) {
-			Vector2 center = new Vector2(text.Width / 2, text.Height / 2);
+			Vector2 center = new Vector2(activeFrame.Width / 2, activeFrame.Height / 2);
 			GetActiveFrame();
 			canvas.Draw(text, position + center, activeFrame, Color.White, rotation, center, 1.0f, SpriteEffects.None, layer);
+			SetFrame(currentFrame + 1);
+		}
+		//Draws the current frame and increments the frame counter by one.
+		public override void DrawCentered(SpriteBatch canvas, Vector2 position, float rotation) {
+			Vector2 center = new Vector2(activeFrame.Width/2, activeFrame.Height/2);
+			GetActiveFrame();
+			canvas.Draw(text, position, activeFrame, Color.White, rotation, center, 1.0f, SpriteEffects.None, layer);
 			SetFrame(currentFrame + 1);
 		}
 	}
