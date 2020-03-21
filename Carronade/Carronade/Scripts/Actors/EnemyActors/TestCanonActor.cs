@@ -22,7 +22,7 @@ namespace Carronade {
 		}
 		public override void Initialize() {
 			canonSprite = new AnimatedSprite(100);
-			widthHeight = new Vector2(Game1.graphics.GraphicsDevice.Viewport.Width, Game1.graphics.GraphicsDevice.Viewport.Height);
+			widthHeight = new Vector2(Game1.mainGame.ViewPort.Width, Game1.mainGame.ViewPort.Height);
 			position = new Vector2(widthHeight.X / 2, widthHeight.Y / 2);
 		}
 		public override void Update(GameTime gameTime) {
@@ -61,6 +61,9 @@ namespace Carronade {
 		}
 		public override Vector2 GetPosition() {
 			return position;
+		}
+		public override Rectangle GetBounds() {
+			return Rectangle.Empty;
 		}
 	}
 } 

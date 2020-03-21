@@ -8,7 +8,6 @@ namespace Carronade {
 	public abstract class KinematicActor : Actor {
 		protected Vector2 velocity = Vector2.Zero;
 		public override void Initialize() {
-			Console.WriteLine("kinematicmade");
 		}
 		public KinematicActor(float x, float y, float r) : base(x, y, r) {
 
@@ -28,7 +27,9 @@ namespace Carronade {
 		public void SetVelocity(Vector2 vel) {
 			velocity = vel;
 		}
-		public override void Update(GameTime gameTime) {
+		public override void LateUpdate(GameTime gameTime) {
+			if (gameTime == null)
+				throw new Exception("Something went wrong with GameTime");
 			Vector2 deltaVel = new Vector2(velocity.X * (float) gameTime.ElapsedGameTime.TotalSeconds, velocity.Y * (float) gameTime.ElapsedGameTime.TotalSeconds);
 			position += deltaVel;
 			//Console.WriteLine(string.Format("{0} : {1} - {2}", position, velocity, deltaVel));

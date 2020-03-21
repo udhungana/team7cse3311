@@ -6,7 +6,7 @@ using System;
 namespace Carronade {
 	//All "interactive" objects in the game will be some form of actor.
 
-	public class TestPlayerActor : KinematicActor {
+	public class TestPlayerActor : PlayerActor {
 		public static TestPlayerActor player;
 		private Sprite playerSprite;
 		private float baseSpeed = 512.0f;
@@ -19,12 +19,10 @@ namespace Carronade {
 		public override void Initialize() {
 			base.Initialize();
 			playerSprite = new Sprite(4);
-			SetVelocity(0,0);
 			if (player == null)
 				player = this;
 		}
 		public override void Update(GameTime gameTime) {
-			base.Update(gameTime);
 			KeyboardState state = Keyboard.GetState();
 			int buildX = 0;
 			int buildY = 0;
@@ -45,19 +43,6 @@ namespace Carronade {
 				rotation = 0;
 			}
 			SetVelocity(vel.X * baseSpeed, vel.Y * baseSpeed);
-			Vector2 playPos = GetCenterPosition();
-			foreach (var actor in Game1.mainGame.actors) {
-				if (Equals(actor.GetType(), typeof(TestEnemyActor))) {
-					//16 + 15
-					Vector2 enemPos = actor.GetCenterPosition();
-					float xDist = playPos.X - enemPos.X;
-					float yDist = playPos.Y - enemPos.Y;
-					if (Math.Sqrt((xDist * xDist + yDist * yDist)) < 32) {
-						Game1.mainGame.RemoveActor(actor);
-					}
-				} else
-					continue;
-			}
 		}
 		public override void Draw(SpriteBatch canvas) {
 			playerSprite.Draw(canvas, position, (float) Math.PI / 180 * rotation);
@@ -67,6 +52,9 @@ namespace Carronade {
 		}
 		public override Vector2 GetPosition() {
 			return position;
+		}
+		public override Rectangle GetBounds() {
+			return playerSprite.GetBounds();
 		}
 	}
 }

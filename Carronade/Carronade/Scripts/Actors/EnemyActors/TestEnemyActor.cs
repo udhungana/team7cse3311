@@ -5,7 +5,7 @@ using System;
 namespace Carronade {
 	//All "interactive" objects in the game will be some form of actor.
 
-	public class TestEnemyActor : KinematicActor {
+	public class TestEnemyActor : EnemyActor {
 		private Sprite enemySprite;
 		private float baseSpeed = 16.0f;
 		public TestEnemyActor(float x, float y, float r, float spd) : base(x, y, r) {
@@ -22,7 +22,18 @@ namespace Carronade {
 			SetVelocity(facing);
 		}
 		public override void Update(GameTime gameTime) {
-			base.Update(gameTime);
+		}
+		public override void LateUpdate(GameTime gameTime) {
+			base.LateUpdate(gameTime);
+			Vector2 pos = GetCenterPosition();
+			if (pos.X < -GetBounds().Width / 2)
+				Game1.mainGame.RemoveActor(this);
+			else if (pos.X > Game1.mainGame.ViewPort.Width)
+				Game1.mainGame.RemoveActor(this);
+			if (pos.Y < -GetBounds().Height / 2)
+				Game1.mainGame.RemoveActor(this);
+			else if (pos.Y > Game1.mainGame.ViewPort.Height)
+				Game1.mainGame.RemoveActor(this);
 		}
 		public override void Draw(SpriteBatch canvas) {
 			enemySprite.DrawCentered(canvas, position, rotation);
@@ -32,6 +43,9 @@ namespace Carronade {
 		}
 		public override Vector2 GetPosition() {
 			return position;
+		}
+		public override Rectangle GetBounds() {
+			return enemySprite.GetBounds();
 		}
 	}
 }

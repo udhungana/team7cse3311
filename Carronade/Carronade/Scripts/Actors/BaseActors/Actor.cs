@@ -25,9 +25,12 @@ namespace Carronade {
 		public abstract void Initialize();
 		//Actors have the ability to update (their position for instance) or recieve input
 		public abstract void Update(GameTime gameTime);
+		//After the lights go out we need to update positions.
+		public abstract void LateUpdate(GameTime gameTime);
 		//All actors will have a draw function but not every actor will necessarily use this.
 		public abstract void Draw(SpriteBatch canvas);
 		public abstract Vector2 GetPosition();
+		public abstract Rectangle GetBounds();
 		public abstract Vector2 GetCenterPosition();
 	}
 }

@@ -30,6 +30,9 @@ namespace Carronade {
 			double delta = gameTime.ElapsedGameTime.TotalSeconds;
 			rotation = (rotation + 360 * (float) (System.Math.PI / 180d * delta)) % 360.0f;
 		}
+		public override void LateUpdate(GameTime gameTime) {
+			throw new System.NotImplementedException();
+		}
 		//All actors will have a draw function but not every actor will necessarily use this.
 		public override void Draw(SpriteBatch canvas) {
 			Vector2 imgPos = new Vector2(widthHeight.X - loadingImage.GetBounds().Width, widthHeight.Y - loadingText.GetBounds().Height);
@@ -43,6 +46,9 @@ namespace Carronade {
 		}
 		public override Vector2 GetPosition() {
 			return position;
+		}
+		public override Rectangle GetBounds() {
+			throw new System.NotImplementedException();
 		}
 	}
 }

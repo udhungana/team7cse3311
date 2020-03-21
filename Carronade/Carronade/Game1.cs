@@ -12,12 +12,14 @@ namespace Carronade {
 		public static GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 		XMLAssetBuilder builder;
-		public static Game1 mainGame;
-
+		public static Game1 mainGame { get; private set;}
+		public Viewport ViewPort { get {
+				return graphics.GraphicsDevice.Viewport;
+			} }
 		public List<Actor> actors;
-		public List<Actor> actorAddQueue;
-		public List<Actor> actorDeleteQueue;
-		public bool actorQueueUpdated = false;
+		private List<Actor> actorAddQueue;
+		private List<Actor> actorDeleteQueue;
+		private bool actorQueueUpdated = false;
 
 		public List<Sprite> drawSprites;
 		public List<Sprite> spriteAddQueue;
@@ -112,6 +114,9 @@ namespace Carronade {
 			if (unpaused) {
 				foreach (var actor in actors) {
 					actor.Update(gameTime);
+				}
+				foreach (var actor in actors) {
+					actor.LateUpdate(gameTime);
 				}
 			}
 			base.Update(gameTime);
