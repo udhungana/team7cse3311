@@ -1,0 +1,10 @@
+<asset>
+	<Image>
+		<name>BackBar</name>
+		<id>200</id>
+	</Image>
+	<Image>
+		<name>FrontBar</name>
+		<id>201</id>
+	</Image>
+</asset>

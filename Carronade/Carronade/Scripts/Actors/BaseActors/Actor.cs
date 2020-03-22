@@ -3,23 +3,39 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Carronade {
 	//All "interactive" objects in the game will be some form of actor.
-	
+
 	public abstract class Actor {
 		protected Vector2 position;
 		protected float rotation;
 		protected float layer;
+		protected bool enabled = false;
+		public long ID { get; private set; } = -1;
+		public static long totalIDs { get; private set; } = 0;
 		protected Actor() {
 			//System.Console.WriteLine("Actor Created at {0} r:{1}", position, rotation);
 		}
 		public Actor(float x, float y, float r) {
 			position = new Vector2(x, y);
 			rotation = r;
-			Initialize();
+			SetID();
 		}
 		public Actor(Vector2 pos, float r) {
 			position = pos;
 			rotation = r;
-			Initialize();
+			SetID();
+		}
+		private void SetID() {
+			ID = totalIDs;
+			totalIDs++;
+		}
+		public void Disable() {
+			enabled = false;
+		}
+		public void Enable() {
+			enabled = true;
+		}
+		public bool IsEnabled() {
+			return enabled;
 		}
 		//Initialize is called whenever the object is created or instanced in the game.
 		public abstract void Initialize();

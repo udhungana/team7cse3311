@@ -5,13 +5,13 @@ using System;
 namespace Carronade {
 	//All "interactive" objects in the game will be some form of actor.
 
-	public class TestEnemyActor : EnemyActor {
+	public class StraightShot : EnemyActor {
 		private Sprite enemySprite;
 		private float baseSpeed = 16.0f;
-		public TestEnemyActor(float x, float y, float r, float spd) : base(x, y, r) {
+		public StraightShot(float x, float y, float r, float spd) : base(x, y, r) {
 			baseSpeed = spd;	
 		}
-		public TestEnemyActor(Vector2 pos, float r, float spd) : base(pos, r) {
+		public StraightShot(Vector2 pos, float r, float spd) : base(pos, r) {
 			baseSpeed = spd;
 		}
 		public override void Initialize() {

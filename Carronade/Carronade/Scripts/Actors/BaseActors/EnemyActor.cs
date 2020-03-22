@@ -8,16 +8,13 @@ namespace Carronade
 
 	public abstract class EnemyActor : KinematicActor
 	{
-		public float damage {get; private set;} = 10;
+		public int damage {get; private set;} = 10;
 		public EnemyActor(float x, float y, float r) : base(x, y, r) {
 		}
 		public EnemyActor(Vector2 pos, float r) : base(pos, r) {
 		}
-		public void SetDamage(float amount) {
+		public void SetDamage(int amount) {
 			damage = amount;
-		}
-		public override void Initialize() {
-			base.Initialize();
 		}
 	}
 }

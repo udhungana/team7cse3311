@@ -1,6 +1,6 @@
 <asset>
 	<Image>
-		<name>loadingText</name>
+		<name>background</name>
 		<id>0</id>
 	</Image>
 	<Image>
@@ -63,5 +63,17 @@
 	<Image>
 		<name>testplayer</name>
 		<id>4</id>
+	</Image>
+	<Image>
+		<name>AccelEnemy</name>
+		<id>5</id>
+	</Image>
+	<Image>
+		<name>TurnArrow</name>
+		<id>6</id>
+	</Image>
+	<Image>
+		<name>BlinkPlayer</name>
+		<id>7</id>
 	</Image>
 </asset>

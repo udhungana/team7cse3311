@@ -7,8 +7,6 @@ namespace Carronade {
 	
 	public abstract class KinematicActor : Actor {
 		protected Vector2 velocity = Vector2.Zero;
-		public override void Initialize() {
-		}
 		public KinematicActor(float x, float y, float r) : base(x, y, r) {
 
 		}

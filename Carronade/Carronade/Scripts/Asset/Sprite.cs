@@ -17,8 +17,11 @@ namespace Carronade {
 		public Rectangle GetBounds() {
 			return text.Bounds;
 		}
-		public virtual void DrawRaw(SpriteBatch canvas, Vector2 position, float rotation, Vector2 origin) {
-			canvas.Draw(text, position, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, layer);
+		public void SetLayer(float depth) {
+			layer = depth;
+		}
+		public virtual void DrawRaw(SpriteBatch canvas, Vector2 position, Rectangle clip, float rotation, Vector2 origin) {
+			canvas.Draw(text, position, clip, Color.White, rotation, origin, 1.0f, SpriteEffects.None, layer);
 		}
 		//We shift the origin to the center and then compensate for the change so we can rotate about the center.
 		public virtual void Draw(SpriteBatch canvas, Vector2 position, float rotation) {

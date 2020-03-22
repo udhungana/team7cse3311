@@ -7,44 +7,55 @@ namespace Carronade {
 	//All "interactive" objects in the game will be some form of actor.
 
 	public abstract class PlayerActor : KinematicActor {
-		private float damageLevel = 0;
-		private float maxDamage = 0;
+		private int damageLevel = 0;
+		private int maxDamage = 0;
 		public PlayerActor(float x, float y, float r) : base(x, y, r) {
 
 		}
 		public PlayerActor(Vector2 pos, float r) : base(pos, r) {
 
 		}
+		public int GetDamageLevel() {
+			return damageLevel;
+		}
+		public int GetMaxDamage() {
+			return maxDamage;
+		}
+		public float GetPercentMaxHealth() {
+			if (damageLevel == 0)
+				return 1.0f;
+			return 1.0f - ((float)damageLevel) / ((float) (maxDamage));
+		}
 		public override void Initialize() {
-			base.Initialize();
 			SetVelocity(0,0);
 		}
-		public void SetMaxDamage(float amount) {
+		public void SetMaxDamage(int amount) {
 			maxDamage = amount;
 		}
-		public void Damage(float amount) {
+		public void Damage(int amount) {
 			damageLevel += amount;
 			damageLevel = Math.Min(damageLevel, maxDamage);
 			if (damageLevel == maxDamage)
 				Perish();
 		}
-		public void Heal(float amount) {
+		public void Heal(int amount) {
 			damageLevel -= amount;
 			damageLevel = Math.Max(damageLevel, 0);
 		}
 		public void Perish() {
-
+			Console.WriteLine("like perish scoobs");
 		}
 		public override void LateUpdate(GameTime gameTime) {
 			Vector2 playPos = GetCenterPosition();
 			foreach (var actor in Game1.mainGame.actors) {
 				Type t = actor.GetType();
-				if (Equals(t, typeof(EnemyActor))) {
-					//16 + 15
+				if (t.IsSubclassOf(typeof(EnemyActor))) {
+					EnemyActor enem = (EnemyActor) actor;
 					Vector2 enemPos = actor.GetCenterPosition();
 					float xDist = playPos.X - enemPos.X;
 					float yDist = playPos.Y - enemPos.Y;
 					if (Math.Sqrt((xDist * xDist + yDist * yDist)) < 32) {
+						Damage(enem.damage);
 						Game1.mainGame.RemoveActor(actor);
 					}
 				} else
