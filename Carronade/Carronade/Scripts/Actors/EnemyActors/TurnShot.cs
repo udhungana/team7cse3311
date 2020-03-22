@@ -31,7 +31,7 @@ namespace Carronade {
 			float directionToPlayer = angleToPlayer - rotation;
 			if (Math.Abs(directionToPlayer) > Math.PI)
 				directionToPlayer -= Math.Sign(directionToPlayer) * (float) Math.PI * 2;
-			rotation += directionToPlayer;
+			rotation += directionToPlayer/30;
 			Vector2 facing = new Vector2(((float)Math.Cos(rotation)) * baseSpeed, ((float)Math.Sin(rotation)) * baseSpeed);
 			SetVelocity(facing);
 		}
