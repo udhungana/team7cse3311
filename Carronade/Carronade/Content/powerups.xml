@@ -1,0 +1,10 @@
+<asset>
+	<Image>
+		<name>HealthRecovery</name>
+		<id>300</id>
+	</Image>
+	<Image>
+		<name>ShieldBuff</name>
+		<id>301</id>
+	</Image>
+</asset>

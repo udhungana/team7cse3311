@@ -51,6 +51,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\Actors\BaseActors\PowerupActor.cs" />
     <Compile Include="Scripts\Actors\BaseActors\KinematicActor.cs" />
     <Compile Include="Scripts\Actors\BaseActors\PlayerActor.cs" />
     <Compile Include="Scripts\Actors\BaseActors\EnemyActor.cs" />
@@ -59,6 +60,8 @@
     <Compile Include="Scripts\Actors\EnemyActors\StraightShot.cs" />
     <Compile Include="Scripts\Actors\PlayerActors\BlinkPlayerActor.cs" />
     <Compile Include="Scripts\Actors\PlayerActors\BasePlayerActor.cs" />
+    <Compile Include="Scripts\Actors\PowerupActors\HealthPowerUpActor.cs" />
+    <Compile Include="Scripts\Actors\PowerupActors\InvulnPowerUpActor.cs" />
     <Compile Include="Scripts\Actors\TestActors\TestCanonActor.cs" />
     <Compile Include="Scripts\Actors\EnemyActors\TestEnemyActor.cs" />
     <Compile Include="Scripts\Actors\TestActors\LoadingActor.cs" />

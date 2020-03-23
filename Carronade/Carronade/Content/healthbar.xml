@@ -7,4 +7,8 @@
 		<name>FrontBar</name>
 		<id>201</id>
 	</Image>
+	<Image>
+		<name>InvulnBar</name>
+		<id>202</id>
+	</Image>
 </asset>

@@ -91,6 +91,30 @@
 #begin healthbar.xml
 /copy:healthbar.xml
 
+#begin HealthRecovery.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:HealthRecovery.png
+
+#begin InvulnBar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:InvulnBar.png
+
 #begin loadingAnimation.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -117,6 +141,21 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:loadingText.png
+
+#begin powerups.xml
+/copy:powerups.xml
+
+#begin ShieldBuff.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:ShieldBuff.png
 
 #begin testcanon.png
 /importer:TextureImporter

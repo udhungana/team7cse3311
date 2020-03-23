@@ -94,6 +94,7 @@ namespace Carronade {
 			builder.LoadAssets("loadingscreen");
 			builder.LoadAssets("canon");
 			builder.LoadAssets("healthbar");
+			builder.LoadAssets("powerups");
 		}
 		public void AddActor(Actor act) {
 			actorAddQueue.Add(act);

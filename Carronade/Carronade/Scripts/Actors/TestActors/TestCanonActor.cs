@@ -14,6 +14,8 @@ namespace Carronade {
 		private double lastSingleShot = -1.0f;
 		private double lastDoubleShot = -1.0f;
 		private double lastTripleShot = -1.0f;
+		private double lastPowerUp = -1.0f;
+		private Random rand = new Random();
 		public TestCanonActor(float x, float y, float r) : base(x, y, r) {
 
 		}
@@ -33,6 +35,7 @@ namespace Carronade {
 				lastSingleShot = gameTime.TotalGameTime.TotalSeconds + 5.0f;
 				lastDoubleShot = gameTime.TotalGameTime.TotalSeconds + 7.0f;
 				lastTripleShot = gameTime.TotalGameTime.TotalSeconds + 10.0f;
+				lastPowerUp = gameTime.TotalGameTime.TotalSeconds + 15.0f;
 			}
 			Vector2 playPos = Game1.mainGame.player.GetCenterPosition();
 			rotation = (float) (Math.Atan2(playPos.Y - position.Y, playPos.X - position.X));
@@ -53,6 +56,16 @@ namespace Carronade {
 			} else if (lastSingleShot < curTime) {
 				Game1.mainGame.AddActor(new StraightShot(canonMuzzle, rotation, 64.0f * 7));
 				lastSingleShot = gameTime.TotalGameTime.TotalSeconds + 0.5f;
+				canonSprite.SetAnimation("idle");
+			}
+			if (lastPowerUp < curTime) {
+				double chance = rand.NextDouble();
+				if (chance < 0.5) {
+					Game1.mainGame.AddActor(new HealthPowerUpActor(canonMuzzle, rotation, 64.0f * 4));
+				} else {
+					Game1.mainGame.AddActor(new InvulnPowerUpActor(canonMuzzle, rotation, 64.0f * 4));
+				}
+				lastPowerUp = curTime + 15.0f;
 				canonSprite.SetAnimation("idle");
 			}
 			float closestShotTime = (float) Math.Min(lastTripleShot, Math.Min(lastSingleShot, lastDoubleShot));

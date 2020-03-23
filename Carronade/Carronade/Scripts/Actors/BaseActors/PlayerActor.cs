@@ -9,6 +9,7 @@ namespace Carronade {
 	public abstract class PlayerActor : KinematicActor {
 		private int damageLevel = 0;
 		private int maxDamage = 0;
+		public bool invuln { get; private set; } = false;
 		public PlayerActor(float x, float y, float r) : base(x, y, r) {
 
 		}
@@ -33,17 +34,25 @@ namespace Carronade {
 			maxDamage = amount;
 		}
 		public void Damage(int amount) {
-			damageLevel += amount;
-			damageLevel = Math.Min(damageLevel, maxDamage);
-			if (damageLevel == maxDamage)
-				Perish();
+			if (!invuln) {
+				damageLevel += amount;
+				damageLevel = Math.Min(damageLevel, maxDamage);
+				if (damageLevel == maxDamage)
+					Perish();
+			}
 		}
 		public void Heal(int amount) {
 			damageLevel -= amount;
 			damageLevel = Math.Max(damageLevel, 0);
 		}
+		public void SetInvuln(bool inv) {
+			invuln = inv;
+		}
 		public void Perish() {
 			Console.WriteLine("like perish scoobs");
+		}
+		public override void Update(GameTime gameTime) {
+			
 		}
 		public override void LateUpdate(GameTime gameTime) {
 			Vector2 playPos = GetCenterPosition();
@@ -51,12 +60,22 @@ namespace Carronade {
 				Type t = actor.GetType();
 				if (t.IsSubclassOf(typeof(EnemyActor))) {
 					EnemyActor enem = (EnemyActor) actor;
-					Vector2 enemPos = actor.GetCenterPosition();
+					Vector2 enemPos = enem.GetCenterPosition();
 					float xDist = playPos.X - enemPos.X;
 					float yDist = playPos.Y - enemPos.Y;
 					if (Math.Sqrt((xDist * xDist + yDist * yDist)) < 32) {
 						Damage(enem.damage);
 						Game1.mainGame.RemoveActor(actor);
+					}
+				} else if(t.IsSubclassOf(typeof(PowerupActor))) {
+					PowerupActor pow = (PowerupActor) actor;
+					if (pow.picked)
+						continue;
+					Vector2 powPos = pow.GetCenterPosition();
+					float xDist = playPos.X - powPos.X;
+					float yDist = playPos.Y - powPos.Y;
+					if (Math.Sqrt((xDist * xDist + yDist * yDist)) < 32) {
+						pow.OnPickup(this, gameTime);
 					}
 				} else
 					continue;
