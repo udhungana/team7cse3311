@@ -26,13 +26,13 @@ namespace Carronade {
 			base.LateUpdate(gameTime);
 			Vector2 pos = GetCenterPosition();
 			if (pos.X < -GetBounds().Width / 2)
-				Game1.mainGame.RemoveActor(this);
+				OnImpact();
 			else if (pos.X > Game1.mainGame.ViewPort.Width)
-				Game1.mainGame.RemoveActor(this);
+				OnImpact();
 			if (pos.Y < -GetBounds().Height / 2)
-				Game1.mainGame.RemoveActor(this);
+				OnImpact();
 			else if (pos.Y > Game1.mainGame.ViewPort.Height)
-				Game1.mainGame.RemoveActor(this);
+				OnImpact();
 		}
 		public override void Draw(SpriteBatch canvas) {
 			enemySprite.DrawCentered(canvas, position, rotation);

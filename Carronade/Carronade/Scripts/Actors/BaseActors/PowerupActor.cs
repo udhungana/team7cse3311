@@ -18,7 +18,7 @@ namespace Carronade
 		public override void Update(GameTime gameTime) {
 			if(picked && gameTime.TotalGameTime.TotalSeconds > expirey) {
 				PickupEnd();
-				Game1.mainGame.RemoveActor(this);
+				GameRoom.gameRoom.RemoveActor(this);
 			}
 		}
 		public void SetDuration(double length) {

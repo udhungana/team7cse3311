@@ -22,7 +22,7 @@ namespace Carronade {
 		public override void Initialize() {
 			base.Initialize();
 			playerSprite = new Sprite(4);
-			Game1.mainGame.player = this;
+			GameRoom.gameRoom.player = this;
 			SetMaxDamage(50);
 		}
 		public override void Update(GameTime gameTime) {

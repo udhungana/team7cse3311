@@ -11,4 +11,45 @@
 		<name>InvulnBar</name>
 		<id>202</id>
 	</Image>
+
+	<Image>
+		<name>Cathode0</name>
+		<id>220</id>
+	</Image>
+	<Image>
+		<name>Cathode1</name>
+		<id>221</id>
+	</Image>
+	<Image>
+		<name>Cathode2</name>
+		<id>222</id>
+	</Image>
+	<Image>
+		<name>Cathode3</name>
+		<id>223</id>
+	</Image>
+	<Image>
+		<name>Cathode4</name>
+		<id>224</id>
+	</Image>
+	<Image>
+		<name>Cathode5</name>
+		<id>225</id>
+	</Image>
+	<Image>
+		<name>Cathode6</name>
+		<id>226</id>
+	</Image>
+	<Image>
+		<name>Cathode7</name>
+		<id>227</id>
+	</Image>
+	<Image>
+		<name>Cathode8</name>
+		<id>228</id>
+	</Image>
+	<Image>
+		<name>Cathode9</name>
+		<id>229</id>
+	</Image>
 </asset>

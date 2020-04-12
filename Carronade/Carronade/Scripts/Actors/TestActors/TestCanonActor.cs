@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-
+using Microsoft.Xna.Framework.Input;
 namespace Carronade {
 	//All "interactive" objects in the game will be some form of actor.
 
@@ -31,41 +31,42 @@ namespace Carronade {
 		}
 		public override void Update(GameTime gameTime) {
 			double curTime = gameTime.TotalGameTime.TotalSeconds;
+			KeyboardState state = Keyboard.GetState();
 			if (lastSingleShot < 0) {
 				lastSingleShot = gameTime.TotalGameTime.TotalSeconds + 5.0f;
 				lastDoubleShot = gameTime.TotalGameTime.TotalSeconds + 7.0f;
 				lastTripleShot = gameTime.TotalGameTime.TotalSeconds + 10.0f;
-				lastPowerUp = gameTime.TotalGameTime.TotalSeconds + 15.0f;
+				lastPowerUp = gameTime.TotalGameTime.TotalSeconds + 3.0f;
 			}
-			Vector2 playPos = Game1.mainGame.player.GetCenterPosition();
+			Vector2 playPos = GameRoom.gameRoom.player.GetCenterPosition();
 			rotation = (float) (Math.Atan2(playPos.Y - position.Y, playPos.X - position.X));
 			canonMuzzle = new Vector2(position.X + (float) Math.Cos(rotation) * 128.0f, position.Y + (float) Math.Sin(rotation) * 128.0f);
 			if(lastTripleShot < curTime) {
-				Game1.mainGame.AddActor(new TurnShot(canonMuzzle, (float) (rotation - Math.PI / 8), 64.0f * 8));
-				Game1.mainGame.AddActor(new AcceleratedShot(canonMuzzle, rotation, 128.0f * 2));
-				Game1.mainGame.AddActor(new TurnShot(canonMuzzle, (float) (rotation + Math.PI / 8), 64.0f * 8));
+				GameRoom.gameRoom.AddActor(new TurnShot(canonMuzzle, (float) (rotation - Math.PI / 8), 64.0f * 8));
+				GameRoom.gameRoom.AddActor(new AcceleratedShot(canonMuzzle, rotation, 128.0f * 2));
+				GameRoom.gameRoom.AddActor(new TurnShot(canonMuzzle, (float) (rotation + Math.PI / 8), 64.0f * 8));
 				lastTripleShot = gameTime.TotalGameTime.TotalSeconds + 5;
 				canonSprite.SetAnimation("idle");
 
 			} else if (lastDoubleShot < curTime) {
-				Game1.mainGame.AddActor(new AcceleratedShot(canonMuzzle, (float)(rotation - Math.PI / 3), 64.0f * 2));
-				Game1.mainGame.AddActor(new AcceleratedShot(canonMuzzle, (float)(rotation + Math.PI / 3), 64.0f * 2));
+				GameRoom.gameRoom.AddActor(new AcceleratedShot(canonMuzzle, (float)(rotation - Math.PI / 3), 64.0f * 2));
+				GameRoom.gameRoom.AddActor(new AcceleratedShot(canonMuzzle, (float)(rotation + Math.PI / 3), 64.0f * 2));
 				lastDoubleShot = gameTime.TotalGameTime.TotalSeconds + 2;
 				canonSprite.SetAnimation("idle");
 
 			} else if (lastSingleShot < curTime) {
-				Game1.mainGame.AddActor(new StraightShot(canonMuzzle, rotation, 64.0f * 7));
+				GameRoom.gameRoom.AddActor(new StraightShot(canonMuzzle, rotation, 64.0f * 7));
 				lastSingleShot = gameTime.TotalGameTime.TotalSeconds + 0.5f;
 				canonSprite.SetAnimation("idle");
 			}
 			if (lastPowerUp < curTime) {
 				double chance = rand.NextDouble();
 				if (chance < 0.5) {
-					Game1.mainGame.AddActor(new HealthPowerUpActor(canonMuzzle, rotation, 64.0f * 4));
+					GameRoom.gameRoom.AddActor(new HealthPowerUpActor(canonMuzzle, rotation, 64.0f * 4));
 				} else {
-					Game1.mainGame.AddActor(new InvulnPowerUpActor(canonMuzzle, rotation, 64.0f * 4));
+					GameRoom.gameRoom.AddActor(new InvulnPowerUpActor(canonMuzzle, rotation, 64.0f * 4));
 				}
-				lastPowerUp = curTime + 15.0f;
+				lastPowerUp = curTime + 3.0f;
 				canonSprite.SetAnimation("idle");
 			}
 			float closestShotTime = (float) Math.Min(lastTripleShot, Math.Min(lastSingleShot, lastDoubleShot));

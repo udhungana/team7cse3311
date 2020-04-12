@@ -49,14 +49,18 @@ namespace Carronade {
 			invuln = inv;
 		}
 		public void Perish() {
-			Console.WriteLine("like perish scoobs");
+			//Notice. This is a terrible idea. We have made 0 guaranteee that the room we've retrieved will be of type GameRoom, however by structure of the code it SHOULD always be GameRoom. Note, SHOULD.
+			//TODO: FIX THIS
+			GameRoom room = (GameRoom) Game1.mainGame.GetActiveRoom();
+			room.Reset();
+			Game1.mainGame.SwitchRooms("MainRoom");
 		}
 		public override void Update(GameTime gameTime) {
 			
 		}
 		public override void LateUpdate(GameTime gameTime) {
 			Vector2 playPos = GetCenterPosition();
-			foreach (var actor in Game1.mainGame.actors) {
+			foreach (var actor in GameRoom.gameRoom.actors) {
 				Type t = actor.GetType();
 				if (t.IsSubclassOf(typeof(EnemyActor))) {
 					EnemyActor enem = (EnemyActor) actor;
@@ -65,7 +69,10 @@ namespace Carronade {
 					float yDist = playPos.Y - enemPos.Y;
 					if (Math.Sqrt((xDist * xDist + yDist * yDist)) < 32) {
 						Damage(enem.damage);
-						Game1.mainGame.RemoveActor(actor);
+						if (invuln)
+							enem.OnKilled();
+						else
+							enem.OnImpact();
 					}
 				} else if(t.IsSubclassOf(typeof(PowerupActor))) {
 					PowerupActor pow = (PowerupActor) actor;

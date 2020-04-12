@@ -70,6 +70,9 @@
     <Compile Include="Scripts\Asset\Animations.cs" />
     <Compile Include="Scripts\Asset\Image.cs" />
     <Compile Include="Scripts\Asset\AnimatedSprite.cs" />
+    <Compile Include="Scripts\Rooms\MainRoom.cs" />
+    <Compile Include="Scripts\Rooms\GameRoom.cs" />
+    <Compile Include="Scripts\Rooms\BaseRoom.cs" />
     <Compile Include="Scripts\XMLAssetBuilder.cs" />
     <Compile Include="Scripts\Actors\BaseActors\Actor.cs" />
     <Compile Include="Scripts\Asset\Sprite.cs" />
@@ -89,9 +92,7 @@
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\UI\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\analyzers\dotnet\cs\Microsoft.CodeAnalysis.VersionCheckAnalyzer.resources.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\analyzers\dotnet\Microsoft.CodeAnalysis.VersionCheckAnalyzer.dll" />

@@ -4,58 +4,13 @@
 		<id>0</id>
 	</Image>
 	<Image>
-		<name>loadingAnimation</name>
+		<name>Logo</name>
 		<id>1</id>
 	</Image>
-	<AnimationSet>
-		<name>animtest</name>
+	<Image>
+		<name>Play</name>
 		<id>2</id>
-		<width>16</width>
-		<height>16</height>
-		<default>rainbow</default>
-		<Animations>
-			<Animation>
-				<name>red</name>
-				<start>0</start>
-				<end>3</end>
-			</Animation>
-			<Animation>
-				<name>orange</name>
-				<start>4</start>
-				<end>7</end>
-			</Animation>
-			<Animation>
-				<name>green</name>
-				<start>8</start>
-				<end>11</end>
-			</Animation>
-			<Animation>
-				<name>blue</name>
-				<start>12</start>
-				<end>15</end>
-			</Animation>
-			<Animation>
-				<name>blue</name>
-				<start>12</start>
-				<end>15</end>
-			</Animation>
-			<Animation>
-				<name>purple</name>
-				<start>16</start>
-				<end>19</end>
-			</Animation>
-			<Animation>
-				<name>purple</name>
-				<start>20</start>
-				<end>23</end>
-			</Animation>
-			<Animation>
-				<name>rainbow</name>
-				<start>0</start>
-				<end>23</end>
-			</Animation>
-		</Animations>
-	</AnimationSet>
+	</Image>
 	<Image>
 		<name>testenemy</name>
 		<id>3</id>

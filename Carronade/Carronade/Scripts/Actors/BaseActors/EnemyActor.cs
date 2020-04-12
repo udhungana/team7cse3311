@@ -16,5 +16,13 @@ namespace Carronade
 		public void SetDamage(int amount) {
 			damage = amount;
 		}
+		public virtual void OnImpact() {
+			GameRoom.gameRoom.RemoveActor(this);
+		}
+
+		public virtual void OnKilled() {
+			GameRoom.gameRoom.IncrementScore(damage);
+			GameRoom.gameRoom.RemoveActor(this);
+		}
 	}
 }

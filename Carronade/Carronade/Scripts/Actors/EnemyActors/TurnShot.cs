@@ -23,8 +23,8 @@ namespace Carronade {
 			SetDamage(5);
 		}
 		public override void Update(GameTime gameTime) {
-			Vector2 playPos = Game1.mainGame.player.GetCenterPosition();
-			Vector2 offset = new Vector2(Game1.mainGame.player.GetBounds().Width / 2, Game1.mainGame.player.GetBounds().Height / 2);
+			Vector2 playPos = GameRoom.gameRoom.player.GetCenterPosition();
+			Vector2 offset = new Vector2(GameRoom.gameRoom.player.GetBounds().Width / 2, GameRoom.gameRoom.player.GetBounds().Height / 2);
 			playPos += offset;
 			Vector2 pos = GetCenterPosition();
 			float angleToPlayer = (float)(Math.Atan2(playPos.Y - pos.Y, playPos.X - pos.X));
@@ -39,13 +39,13 @@ namespace Carronade {
 			base.LateUpdate(gameTime);
 			Vector2 pos = GetCenterPosition();
 			if (pos.X < -GetBounds().Width / 2)
-				Game1.mainGame.RemoveActor(this);
+				OnKilled();
 			else if (pos.X > Game1.mainGame.ViewPort.Width)
-				Game1.mainGame.RemoveActor(this);
+				OnKilled();
 			if (pos.Y < -GetBounds().Height / 2)
-				Game1.mainGame.RemoveActor(this);
+				OnKilled();
 			else if (pos.Y > Game1.mainGame.ViewPort.Height)
-				Game1.mainGame.RemoveActor(this);
+				OnKilled();
 		}
 		public override void Draw(SpriteBatch canvas) {
 			enemySprite.DrawCentered(canvas, position, rotation);
