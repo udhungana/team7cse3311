@@ -5,22 +5,35 @@ using System;
 namespace Carronade {
 	//All "interactive" objects in the game will be some form of actor.
 
-	public class StraightShot : EnemyActor {
+	public class MineShot : EnemyActor {
 		private Sprite enemySprite;
 		private float baseSpeed = 16.0f;
-		public StraightShot(float x, float y, float r, float spd) : base(x, y, r) {
+		private double birthTime = -1;
+		public MineShot(float x, float y, float r, float spd) : base(x, y, r) {
 			baseSpeed = spd;	
 		}
-		public StraightShot(Vector2 pos, float r, float spd) : base(pos, r) {
+		public MineShot(Vector2 pos, float r, float spd) : base(pos, r) {
 			baseSpeed = spd;
 		}
 		public override void Initialize() {
-			enemySprite = new Sprite(400);
+			enemySprite = new Sprite(403);
 			Vector2 facing = new Vector2(((float) Math.Cos(rotation)) * baseSpeed, ((float) Math.Sin(rotation)) * baseSpeed);
 			//Console.WriteLine(string.Format("{0} - {1}:{2}", facing, Math.Cos(Math.PI / 180 * rotation), Math.Sin(Math.PI / 180 * rotation)));
 			SetVelocity(facing);
+			SetDamage(30);
 		}
 		public override void Update(GameTime gameTime) {
+			double curTime = gameTime.TotalGameTime.TotalSeconds;
+			if (birthTime == -1)
+				birthTime = curTime;
+			double timeDifference = curTime - birthTime;
+			float scaledSpeed = baseSpeed / (float) (2.0f + timeDifference * timeDifference);
+			scaledSpeed = Math.Max(0.0f, scaledSpeed);
+			Vector2 facing = new Vector2(((float) Math.Cos(rotation)) * scaledSpeed, ((float)Math.Sin(rotation)) * scaledSpeed);
+			SetVelocity(facing);
+			if(curTime - birthTime > 5.0d) {
+				OnKilled();
+			}
 		}
 		public override void LateUpdate(GameTime gameTime) {
 			base.LateUpdate(gameTime);

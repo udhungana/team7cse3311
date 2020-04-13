@@ -24,6 +24,12 @@ namespace Carronade {
 			base.OnPickup(player, gameTime);
 			playerRef.SetInvuln(true);
 		}
+		public override void LateUpdate(GameTime gameTime) {
+			base.LateUpdate(gameTime);
+			if(playerRef != null)
+				if (!playerRef.invuln && gameTime.TotalGameTime.TotalSeconds < expirey)
+					playerRef.SetInvuln(true);
+		}
 		public override void PickupEnd() {
 			playerRef.SetInvuln(false);
 			base.PickupEnd();

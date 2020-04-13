@@ -55,9 +55,11 @@
     <Compile Include="Scripts\Actors\BaseActors\KinematicActor.cs" />
     <Compile Include="Scripts\Actors\BaseActors\PlayerActor.cs" />
     <Compile Include="Scripts\Actors\BaseActors\EnemyActor.cs" />
+    <Compile Include="Scripts\Actors\EnemyActors\MineShot.cs" />
     <Compile Include="Scripts\Actors\EnemyActors\TurnShot.cs" />
     <Compile Include="Scripts\Actors\EnemyActors\AcceleratedShot.cs" />
     <Compile Include="Scripts\Actors\EnemyActors\StraightShot.cs" />
+    <Compile Include="Scripts\Actors\PlayerActors\HunkerPlayerActor.cs" />
     <Compile Include="Scripts\Actors\PlayerActors\BlinkPlayerActor.cs" />
     <Compile Include="Scripts\Actors\PlayerActors\BasePlayerActor.cs" />
     <Compile Include="Scripts\Actors\PowerupActors\HealthPowerUpActor.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="Scripts\Asset\Animations.cs" />
     <Compile Include="Scripts\Asset\Image.cs" />
     <Compile Include="Scripts\Asset\AnimatedSprite.cs" />
+    <Compile Include="Scripts\Rooms\SelectionRoom.cs" />
     <Compile Include="Scripts\Rooms\MainRoom.cs" />
     <Compile Include="Scripts\Rooms\GameRoom.cs" />
     <Compile Include="Scripts\Rooms\BaseRoom.cs" />

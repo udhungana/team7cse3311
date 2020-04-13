@@ -16,7 +16,7 @@ namespace Carronade {
 			baseSpeed = spd;
 		}
 		public override void Initialize() {
-			enemySprite = new Sprite(5);
+			enemySprite = new Sprite(402);
 			Vector2 facing = new Vector2(((float) Math.Cos(rotation)) * baseSpeed, ((float) Math.Sin(rotation)) * baseSpeed);
 			//Console.WriteLine(string.Format("{0} - {1}:{2}", facing, Math.Cos(Math.PI / 180 * rotation), Math.Sin(Math.PI / 180 * rotation)));
 			SetVelocity(facing);

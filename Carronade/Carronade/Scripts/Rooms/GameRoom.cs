@@ -11,23 +11,43 @@ namespace Carronade {
 		public PlayerActor player;
 		private KeyboardState previousState;
 		private bool unpaused = true;
-
+		private Type createPlayer;
 		private Sprite background;
+		public enum ROOMSETUP { CLASSIC = 0, TWO };
+		private ROOMSETUP build = ROOMSETUP.CLASSIC;
 		public int Score { get; private set; }
 		public double TimeStart { get; private set; } = -1;
 		public GameRoom() : base() {
 			Initialize();
 		}
+		public void SetBuild(int type) {
+			build = (ROOMSETUP) (type);
+		}
+		public void SetPlayerType(Type player) {
+			if(player.IsSubclassOf(typeof(PlayerActor))) {
+				createPlayer = player;
+			}
+		}
 		//Initialize is called whenever the object is created or instanced in the game.
 		public override void Initialize() {
 			base.Initialize();
 			background = new Sprite(0);
+			createPlayer = typeof(BasePlayerActor);
 			//actors.Add(new LoadingActor(0,0,0));
-			AddActor(new BasePlayerActor(600, 600, 0));
-			AddActor(new TestCanonActor(0, 0, 0));
-			AddActor(new HealthbarActor(0, 0, 0));
 			if (gameRoom == null) {
 				gameRoom = this;
+			}
+		}
+		public void BuildRoom() {
+			if(build == ROOMSETUP.CLASSIC) {
+				AddActor((Actor) Activator.CreateInstance(createPlayer, Game1.mainGame.ViewPort.Width / 2, 100, 0));
+				AddActor(new TestCanonActor(Game1.mainGame.ViewPort.Width/2, Game1.mainGame.ViewPort.Height/2, 0));
+				AddActor(new HealthbarActor(0, 0, 0));
+			} else {
+				AddActor((Actor)Activator.CreateInstance(createPlayer, Game1.mainGame.ViewPort.Width / 2, 100, 0));
+				AddActor(new TestCanonActor(0, Game1.mainGame.ViewPort.Height / 2, 0));
+				AddActor(new TestCanonActor(Game1.mainGame.ViewPort.Width, Game1.mainGame.ViewPort.Height / 2, 0));
+				AddActor(new HealthbarActor(0, 0, 0));
 			}
 		}
 		public void IncrementScore(int amount) {
@@ -38,9 +58,7 @@ namespace Carronade {
 				actor.Disable();
 				RemoveActor(actor);
 			}
-			AddActor(new BlinkPlayerActor(600, 600, 0));
-			AddActor(new TestCanonActor(0, 0, 0));
-			AddActor(new HealthbarActor(0, 0, 0));
+			BuildRoom();
 			Score = 0;
 			TimeStart = -1;
 		}
@@ -52,9 +70,15 @@ namespace Carronade {
 				TimeStart = gameTime.TotalGameTime.TotalSeconds;
 			KeyboardState state = Keyboard.GetState();
 			// If they hit esc, exit
-			if (state.IsKeyDown(Keys.P))
+			if (state.IsKeyDown(Keys.P) && !previousState.IsKeyDown(
+				Keys.P)) {
+				unpaused = !unpaused;
+			}
+			if (state.IsKeyDown(Keys.Q) && !previousState.IsKeyDown(
+				Keys.Q) && !Game1.mainGame.prevState.IsKeyDown(Keys.Q)) {
 				Game1.mainGame.SwitchRooms("MainRoom");
-			if (state.IsKeyDown(Keys.R) & !previousState.IsKeyDown(
+			}
+			if (state.IsKeyDown(Keys.R) && !previousState.IsKeyDown(
 				Keys.R)) {
 				Reset();
 			}

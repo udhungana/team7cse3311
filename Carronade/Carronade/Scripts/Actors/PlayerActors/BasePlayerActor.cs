@@ -21,7 +21,7 @@ namespace Carronade {
 		}
 		public override void Initialize() {
 			base.Initialize();
-			playerSprite = new Sprite(4);
+			playerSprite = new Sprite(500);
 			GameRoom.gameRoom.player = this;
 			SetMaxDamage(50);
 		}

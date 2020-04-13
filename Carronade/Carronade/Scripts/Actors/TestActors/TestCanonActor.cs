@@ -25,8 +25,6 @@ namespace Carronade {
 		public override void Initialize() {
 			canonSprite = new AnimatedSprite(100);
 			canonSprite.SetLayer(0.5f);
-			widthHeight = new Vector2(Game1.mainGame.ViewPort.Width, Game1.mainGame.ViewPort.Height);
-			position = new Vector2(widthHeight.X / 2, widthHeight.Y / 2);
 			Console.WriteLine("Initialized {" + ID + "}");
 		}
 		public override void Update(GameTime gameTime) {
@@ -36,7 +34,7 @@ namespace Carronade {
 				lastSingleShot = gameTime.TotalGameTime.TotalSeconds + 5.0f;
 				lastDoubleShot = gameTime.TotalGameTime.TotalSeconds + 7.0f;
 				lastTripleShot = gameTime.TotalGameTime.TotalSeconds + 10.0f;
-				lastPowerUp = gameTime.TotalGameTime.TotalSeconds + 3.0f;
+				lastPowerUp = gameTime.TotalGameTime.TotalSeconds + 12.0f;
 			}
 			Vector2 playPos = GameRoom.gameRoom.player.GetCenterPosition();
 			rotation = (float) (Math.Atan2(playPos.Y - position.Y, playPos.X - position.X));
@@ -44,6 +42,7 @@ namespace Carronade {
 			if(lastTripleShot < curTime) {
 				GameRoom.gameRoom.AddActor(new TurnShot(canonMuzzle, (float) (rotation - Math.PI / 8), 64.0f * 8));
 				GameRoom.gameRoom.AddActor(new AcceleratedShot(canonMuzzle, rotation, 128.0f * 2));
+				GameRoom.gameRoom.AddActor(new MineShot(canonMuzzle, rotation, 64.0f * 9));
 				GameRoom.gameRoom.AddActor(new TurnShot(canonMuzzle, (float) (rotation + Math.PI / 8), 64.0f * 8));
 				lastTripleShot = gameTime.TotalGameTime.TotalSeconds + 5;
 				canonSprite.SetAnimation("idle");
@@ -51,6 +50,7 @@ namespace Carronade {
 			} else if (lastDoubleShot < curTime) {
 				GameRoom.gameRoom.AddActor(new AcceleratedShot(canonMuzzle, (float)(rotation - Math.PI / 3), 64.0f * 2));
 				GameRoom.gameRoom.AddActor(new AcceleratedShot(canonMuzzle, (float)(rotation + Math.PI / 3), 64.0f * 2));
+				GameRoom.gameRoom.AddActor(new MineShot(canonMuzzle, rotation, 64.0f * 7));
 				lastDoubleShot = gameTime.TotalGameTime.TotalSeconds + 2;
 				canonSprite.SetAnimation("idle");
 
@@ -66,7 +66,7 @@ namespace Carronade {
 				} else {
 					GameRoom.gameRoom.AddActor(new InvulnPowerUpActor(canonMuzzle, rotation, 64.0f * 4));
 				}
-				lastPowerUp = curTime + 3.0f;
+				lastPowerUp = curTime + 6.0f;
 				canonSprite.SetAnimation("idle");
 			}
 			float closestShotTime = (float) Math.Min(lastTripleShot, Math.Min(lastSingleShot, lastDoubleShot));

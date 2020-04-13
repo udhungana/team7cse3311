@@ -15,6 +15,7 @@ namespace Carronade {
 		public static Game1 mainGame { get; private set; }
 		private BaseRoom activeRoom;
 		private Dictionary<string, BaseRoom> rooms;
+		public KeyboardState prevState;
 		XMLAssetBuilder builder;
 		public Viewport ViewPort { get {
 				return graphics.GraphicsDevice.Viewport;
@@ -48,10 +49,17 @@ namespace Carronade {
 			GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
 			rooms.Add("GameRoom", new GameRoom());
 			rooms.Add("MainRoom", new MainRoom());
+			rooms.Add("SelectionRoom", new SelectionRoom());
 			activeRoom = rooms["MainRoom"];
 		}
 		public BaseRoom GetActiveRoom() {
 			return activeRoom;
+		}
+		public BaseRoom GetRoom(string room) {
+			if (rooms.ContainsKey(room)) {
+				return rooms[room];
+			}
+			return null;
 		}
 		public void SwitchRooms(string room) {
 			if(rooms.ContainsKey(room)) {
@@ -67,6 +75,8 @@ namespace Carronade {
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 			// TODO: use this.Content to load your game content here
 			builder.LoadAssets("loadingscreen");
+			builder.LoadAssets("players");
+			builder.LoadAssets("enemies");
 			builder.LoadAssets("canon");
 			builder.LoadAssets("healthbar");
 			builder.LoadAssets("powerups");
@@ -88,6 +98,7 @@ namespace Carronade {
 		protected override void Update(GameTime gameTime) {
 			if (activeRoom != null)
 				activeRoom.Update(gameTime);
+			prevState = Keyboard.GetState();
 			base.Update(gameTime);
 		}
 

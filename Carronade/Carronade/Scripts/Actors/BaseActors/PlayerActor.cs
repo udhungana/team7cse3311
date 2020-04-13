@@ -49,10 +49,6 @@ namespace Carronade {
 			invuln = inv;
 		}
 		public void Perish() {
-			//Notice. This is a terrible idea. We have made 0 guaranteee that the room we've retrieved will be of type GameRoom, however by structure of the code it SHOULD always be GameRoom. Note, SHOULD.
-			//TODO: FIX THIS
-			GameRoom room = (GameRoom) Game1.mainGame.GetActiveRoom();
-			room.Reset();
 			Game1.mainGame.SwitchRooms("MainRoom");
 		}
 		public override void Update(GameTime gameTime) {

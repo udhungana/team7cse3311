@@ -1,0 +1,18 @@
+<asset>
+	<Image>
+		<name>StraightArrow</name>
+		<id>400</id>
+	</Image>
+	<Image>
+		<name>TurnArrow</name>
+		<id>401</id>
+	</Image>
+	<Image>
+		<name>AccelEnemy</name>
+		<id>402</id>
+	</Image>
+	<Image>
+		<name>StopEnemy</name>
+		<id>403</id>
+	</Image>
+</asset>

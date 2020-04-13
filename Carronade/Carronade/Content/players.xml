@@ -1,0 +1,14 @@
+<asset>
+	<Image>
+		<name>SprintPlayer</name>
+		<id>500</id>
+	</Image>
+	<Image>
+		<name>BlinkPlayer</name>
+		<id>501</id>
+	</Image>
+	<Image>
+		<name>HunkerPlayer</name>
+		<id>502</id>
+	</Image>
+</asset>

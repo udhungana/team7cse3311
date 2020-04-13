@@ -34,7 +34,7 @@ namespace Carronade {
 			if (Mouse.GetState().X >= playOffset.X && Mouse.GetState().Y >= playOffset.Y) {
 				if(Mouse.GetState().X <= playOffset.X + play.GetBounds().Width && Mouse.GetState().Y <= playOffset.Y + play.GetBounds().Height) {
 					if (mouseClick.LeftButton == ButtonState.Pressed) {
-						Game1.mainGame.SwitchRooms("GameRoom");
+						Game1.mainGame.SwitchRooms("SelectionRoom");
 					}
 				}
 			}

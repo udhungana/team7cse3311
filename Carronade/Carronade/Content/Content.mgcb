@@ -196,6 +196,9 @@
 /processorParam:TextureFormat=Color
 /build:Cathode9.png
 
+#begin enemies.xml
+/copy:enemies.xml
+
 #begin Exit.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -234,6 +237,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:HealthRecovery.png
+
+#begin HunkerPlayer.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:HunkerPlayer.png
 
 #begin InvulnBar.png
 /importer:TextureImporter
@@ -274,6 +289,9 @@
 /processorParam:TextureFormat=Color
 /build:Play.png
 
+#begin players.xml
+/copy:players.xml
+
 #begin powerups.xml
 /copy:powerups.xml
 
@@ -289,6 +307,42 @@
 /processorParam:TextureFormat=Color
 /build:ShieldBuff.png
 
+#begin SprintPlayer.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:SprintPlayer.png
+
+#begin StopEnemy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:StopEnemy.png
+
+#begin StraightArrow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:StraightArrow.png
+
 #begin testcanon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -300,30 +354,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:testcanon.png
-
-#begin testenemy.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:testenemy.png
-
-#begin testplayer.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:testplayer.png
 
 #begin TurnArrow.png
 /importer:TextureImporter
