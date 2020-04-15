@@ -10,11 +10,13 @@ namespace Carronade
 	{
 		public bool picked { get; private set; } = false;
 		protected double expirey = -1;
+		//Keep track of the player who touched it. Who knows, two player shenanigans future proofing.
 		protected PlayerActor playerRef;
 		public PowerupActor(float x, float y, float r) : base(x, y, r) {
 		}
 		public PowerupActor(Vector2 pos, float r) : base(pos, r) {
 		}
+		//All powerups have a limited duration and must finish after their expirey.
 		public override void Update(GameTime gameTime) {
 			if(picked && gameTime.TotalGameTime.TotalSeconds > expirey) {
 				PickupEnd();

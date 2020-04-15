@@ -4,7 +4,7 @@ using System;
 
 namespace Carronade {
 	//All "interactive" objects in the game will be some form of actor.
-
+	//TEST ACTOR PLEASE IGNORE.
 	public class TestEnemyActor : EnemyActor {
 		private Sprite enemySprite;
 		private float baseSpeed = 16.0f;

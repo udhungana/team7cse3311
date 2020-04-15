@@ -4,7 +4,7 @@ using System;
 
 namespace Carronade {
 	//All "interactive" objects in the game will be some form of actor.
-	
+	//All moving actors believe in the church of the Kinematics
 	public abstract class KinematicActor : Actor {
 		protected Vector2 velocity = Vector2.Zero;
 		public KinematicActor(float x, float y, float r) : base(x, y, r) {
@@ -25,6 +25,7 @@ namespace Carronade {
 		public void SetVelocity(Vector2 vel) {
 			velocity = vel;
 		}
+		//Update the position after any velocity changes.
 		public override void LateUpdate(GameTime gameTime) {
 			if (gameTime == null)
 				throw new Exception("Something went wrong with GameTime");

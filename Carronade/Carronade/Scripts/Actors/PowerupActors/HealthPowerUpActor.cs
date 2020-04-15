@@ -20,6 +20,7 @@ namespace Carronade {
 			Vector2 facing = new Vector2(((float) Math.Cos(rotation)) * baseSpeed, ((float) Math.Sin(rotation)) * baseSpeed);
 			SetVelocity(facing);
 		}
+		//i need healing
 		public override void OnPickup(PlayerActor player, GameTime gameTime) {
 			base.OnPickup(player, gameTime);
 			playerRef.Heal(20);

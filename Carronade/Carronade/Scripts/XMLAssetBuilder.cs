@@ -20,6 +20,7 @@ namespace Carronade {
 				Console.WriteLine("oh no. it didn't load. oh well");
 				return;
 			}
+			//Discount XML processor. TODO?: Add proper XML structuring and validation.
 			XmlNode definition = doc.FirstChild;
 			if (definition.Name.Equals("asset") && definition.HasChildNodes) {
 				foreach(XmlNode asset in definition.ChildNodes) {

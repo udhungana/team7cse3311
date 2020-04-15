@@ -22,6 +22,9 @@ namespace Carronade {
 			SetVelocity(facing);
 			SetDamage(20);
 		}
+		//gotta go fast
+		//Accelerated arrows go faster the longer they're alive.
+		//TODO: Raycast into the player
 		public override void Update(GameTime gameTime) {
 			double curTime = gameTime.TotalGameTime.TotalSeconds;
 			if (birthTime == -1)

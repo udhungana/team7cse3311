@@ -26,11 +26,13 @@ namespace Carronade {
 		}
 		//Actors have the ability to update (their position for instance) or recieve input
 		public override void Update(GameTime gameTime) {
+			//Mouse should only be visible on the Main Menu.
 			if(!Game1.mainGame.IsMouseVisible)
 				Game1.mainGame.IsMouseVisible = true;
 			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Game1.mainGame.Exit();
 			MouseState mouseClick = Mouse.GetState();
+			//TODO: Create a proper button UI class (Actor?)
 			if (Mouse.GetState().X >= playOffset.X && Mouse.GetState().Y >= playOffset.Y) {
 				if(Mouse.GetState().X <= playOffset.X + play.GetBounds().Width && Mouse.GetState().Y <= playOffset.Y + play.GetBounds().Height) {
 					if (mouseClick.LeftButton == ButtonState.Pressed) {
@@ -40,10 +42,9 @@ namespace Carronade {
 			}
 			lastState = mouseClick;
 		}
-		//After the lights go out we need to update positions.
 		public override void LateUpdate(GameTime gameTime) {
 		}
-		//All actors will have a draw function but not every actor will necessarily use this.
+		//Nothing much to draw.
 		public override void Draw(SpriteBatch spriteBatch, GameTime gameTime) {
 			spriteBatch.Begin();
 			background.Draw(spriteBatch, Vector2.Zero, 0.0f);

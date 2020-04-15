@@ -32,6 +32,7 @@ namespace Carronade {
 				hunkerStart = curTime + - 1.0d;
 				hunkerEnd = curTime;
 			}
+			//the power of WASD. W and S keys cancel each other out in the same way A and D should.
 			int buildX = 0;
 			int buildY = 0;
 			if (state.IsKeyDown(Keys.W))
@@ -42,6 +43,7 @@ namespace Carronade {
 				buildX -= 1;
 			if (state.IsKeyDown(Keys.D))
 				buildX += 1;
+
 			if (state.IsKeyDown(Keys.LeftShift)) {
 				if(curTime < hunkerStart) {
 					baseSpeed = 0.0f;
@@ -55,6 +57,9 @@ namespace Carronade {
 					baseSpeed = 448.0f;
 					SetInvuln(false);
 				}
+			} else {
+				baseSpeed = 448.0f;
+				SetInvuln(false);
 			}
 			Vector2 vel = new Vector2(buildX, buildY);
 			if (vel != Vector2.Zero)

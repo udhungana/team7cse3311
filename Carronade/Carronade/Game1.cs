@@ -9,13 +9,16 @@ namespace Carronade {
 	/// This is the main type for your game.
 	/// </summary>
 	public class Game1 : Game {
-		public static GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
+		//Globally accessible fields for use in a singleton pattern.
+		public static GraphicsDeviceManager graphics { get; private set; }
 		public static Game1 mainGame { get; private set; }
+
+		public KeyboardState prevState;
 		private BaseRoom activeRoom;
 		private Dictionary<string, BaseRoom> rooms;
-		public KeyboardState prevState;
+
 		XMLAssetBuilder builder;
 		public Viewport ViewPort { get {
 				return graphics.GraphicsDevice.Viewport;
@@ -41,17 +44,21 @@ namespace Carronade {
 		/// and initialize them as well.
 		/// </summary>
 		protected override void Initialize() {
-			// TODO: Add your initialization logic here
 			base.Initialize();
+			//Set the resolution
 			graphics.PreferredBackBufferWidth = 80 * 16;
 			graphics.PreferredBackBufferHeight = 60 * 16;
 			graphics.ApplyChanges();
+			//Give the pixel art sharper edges
 			GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+			//Create all the rooms for room transitioning.
 			rooms.Add("GameRoom", new GameRoom());
 			rooms.Add("MainRoom", new MainRoom());
 			rooms.Add("SelectionRoom", new SelectionRoom());
+			//Start at the main menu.
 			activeRoom = rooms["MainRoom"];
 		}
+		//The following function names make the intent and functionality of a room self-explanatory.
 		public BaseRoom GetActiveRoom() {
 			return activeRoom;
 		}
@@ -73,7 +80,7 @@ namespace Carronade {
 		protected override void LoadContent() {
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
-			// TODO: use this.Content to load your game content here
+			// Loads each category of assets for the sake of organization. If there's a breakdown in one file, it's easier to pinpoint
 			builder.LoadAssets("loadingscreen");
 			builder.LoadAssets("players");
 			builder.LoadAssets("enemies");
@@ -96,8 +103,10 @@ namespace Carronade {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime) {
+			//Only one room can be actively updating and drawing at a time.
 			if (activeRoom != null)
 				activeRoom.Update(gameTime);
+			//For keypresses between rooms.
 			prevState = Keyboard.GetState();
 			base.Update(gameTime);
 		}

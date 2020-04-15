@@ -64,6 +64,7 @@ namespace Carronade {
 		}
 		//Actors have the ability to update (their position for instance) or recieve input
 		public override void Update(GameTime gameTime) {
+			//Mouse should only be visible on the Main Menu.
 			if (Game1.mainGame.IsMouseVisible)
 				Game1.mainGame.IsMouseVisible = false;
 			if (TimeStart < 0)

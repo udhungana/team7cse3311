@@ -4,11 +4,16 @@ using System;
 
 namespace Carronade {
 	public class Sprite {
+		//Sprites refer to loaded in Assets by their ID. Look up an Asset by ID and then refer to it. Makes all Assets copy REFERENCES and not Texture2D data themselves.
 		protected int AIDRef = -1;
 		protected Texture2D text;
+		//Draw layer, so we can organize where sprites appear on the Z axis
 		protected float layer = 0;
+		//TODO: Implement DrawType so AnimatedSprites are still during game pauses.
 		public enum DrawType {REGULAR, ALWAYS_ANIM, ANIM};
 		protected DrawType type = DrawType.REGULAR;
+
+		//TODO?: Validate Assets as a given type
 		public Sprite(int assetID) {
 			Asset asset = Asset.GetAsset(assetID);
 			text = asset.GetAssetReference<Texture2D>();
@@ -20,6 +25,7 @@ namespace Carronade {
 		public void SetLayer(float depth) {
 			layer = depth;
 		}
+		//If we want more control
 		public virtual void DrawRaw(SpriteBatch canvas, Vector2 position, Rectangle clip, float rotation, Vector2 origin) {
 			canvas.Draw(text, position, clip, Color.White, rotation, origin, 1.0f, SpriteEffects.None, layer);
 		}

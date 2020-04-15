@@ -3,7 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Carronade {
 	//All "interactive" objects in the game will be some form of actor.
-	
+	//
+	//TEST ACTOR PLEASE IGNORE.
+	//
+	//
+	//please :(
 	public class LoadingActor : Actor {
 		private Vector2 widthHeight;
 		private Sprite loadingText;

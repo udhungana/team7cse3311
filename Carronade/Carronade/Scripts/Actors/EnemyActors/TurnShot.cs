@@ -8,7 +8,6 @@ namespace Carronade {
 	public class TurnShot : EnemyActor {
 		private Sprite enemySprite;
 		private float baseSpeed = 16.0f;
-		private double birthTime = -1;
 		public TurnShot(float x, float y, float r, float spd) : base(x, y, r) {
 			baseSpeed = spd;	
 		}
@@ -22,15 +21,19 @@ namespace Carronade {
 			SetVelocity(facing);
 			SetDamage(5);
 		}
+		//Funny this Enemy type
 		public override void Update(GameTime gameTime) {
 			Vector2 playPos = GameRoom.gameRoom.player.GetCenterPosition();
 			Vector2 offset = new Vector2(GameRoom.gameRoom.player.GetBounds().Width / 2, GameRoom.gameRoom.player.GetBounds().Height / 2);
 			playPos += offset;
 			Vector2 pos = GetCenterPosition();
+			//By nature of ATAN2, the arrow sometime does a whole 360 to collide into the player.
 			float angleToPlayer = (float)(Math.Atan2(playPos.Y - pos.Y, playPos.X - pos.X));
 			float directionToPlayer = angleToPlayer - rotation;
 			if (Math.Abs(directionToPlayer) > Math.PI)
 				directionToPlayer -= Math.Sign(directionToPlayer) * (float) Math.PI * 2;
+
+			//Denies PERFECT tracking of the player
 			rotation += directionToPlayer/20;
 			Vector2 facing = new Vector2(((float)Math.Cos(rotation)) * baseSpeed, ((float)Math.Sin(rotation)) * baseSpeed);
 			SetVelocity(facing);

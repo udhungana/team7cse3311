@@ -7,6 +7,7 @@ namespace Carronade {
 	//Animations are a single image that we cookie-cut out given frames and assemble them in post as an animation.
 	public class Animations : Asset {
 		private readonly Texture2D asset;
+		//TODO: Add offsets so animations don't accidentally leak into themselves.
 		public readonly int cellWidth;
 		public readonly int cellHeight;
 		public readonly string defaultAnim;

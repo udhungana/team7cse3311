@@ -4,9 +4,12 @@ namespace Carronade {
 	//We load in assets and have scripts individually call for their assetIDs whenever they need them. Hardcoding? Perhaps a little, if this weren't Iteration 1, then there'd be more effort put typing each thing with their given assets via XML.
 
 	public abstract class Asset {
-		public static Asset NULL_ASSET = null;
+		//Something the NULL_ASSET? it's more likely than you think.
+		public static Asset NULL_ASSET { get; private set; } = null;
 		public int assetID { get; private set; }
+		//Whatever the Asset is being stored as we'll go ahead and just return that.
 		public abstract T GetAssetReference<T>();
+		//Accessible list of assets.
 		private static IDictionary<int, Asset> assets = new Dictionary<int, Asset>();
 		public Asset(int ID) {
 			if(assets.Keys.Contains(ID)) {

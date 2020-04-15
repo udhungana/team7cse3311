@@ -16,6 +16,8 @@ namespace Carronade {
 		public PlayerActor(Vector2 pos, float r) : base(pos, r) {
 
 		}
+		#region HEALTH FUNCTIONS
+		//It's easier to do a lot of math involving health if it's keeping track of how much DAMAGE the player has taken as opposed to how much HEALTH is remaining
 		public int GetDamageLevel() {
 			return damageLevel;
 		}
@@ -36,6 +38,7 @@ namespace Carronade {
 		public void Damage(int amount) {
 			if (!invuln) {
 				damageLevel += amount;
+				//The damage taken can NEVER exceed the maxDamage, that's the point
 				damageLevel = Math.Min(damageLevel, maxDamage);
 				if (damageLevel == maxDamage)
 					Perish();
@@ -43,26 +46,32 @@ namespace Carronade {
 		}
 		public void Heal(int amount) {
 			damageLevel -= amount;
+			//A player can NEVER have negative damage taken.
 			damageLevel = Math.Max(damageLevel, 0);
 		}
 		public void SetInvuln(bool inv) {
 			invuln = inv;
 		}
+		//Then
 		public void Perish() {
 			Game1.mainGame.SwitchRooms("MainRoom");
 		}
+		#endregion
 		public override void Update(GameTime gameTime) {
 			
 		}
+		//Collision detection!
 		public override void LateUpdate(GameTime gameTime) {
 			Vector2 playPos = GetCenterPosition();
 			foreach (var actor in GameRoom.gameRoom.actors) {
 				Type t = actor.GetType();
+				//Spend as little time as humanly possible comparing the player to every actor type that exists in the room.
 				if (t.IsSubclassOf(typeof(EnemyActor))) {
 					EnemyActor enem = (EnemyActor) actor;
 					Vector2 enemPos = enem.GetCenterPosition();
 					float xDist = playPos.X - enemPos.X;
 					float yDist = playPos.Y - enemPos.Y;
+					//Collisions treat both objects as circle. Not the most accurate hit detection but computationally cheap and easier to write.
 					if (Math.Sqrt((xDist * xDist + yDist * yDist)) < 32) {
 						Damage(enem.damage);
 						if (invuln)
@@ -84,6 +93,7 @@ namespace Carronade {
 					continue;
 			}
 			base.LateUpdate(gameTime);
+			//Out of bounds correction
 			if (playPos.X < -GetBounds().Width / 2)
 				position = new Vector2(-GetBounds().Width / 2, position.Y);
 			else if (playPos.X > Game1.mainGame.ViewPort.Width)

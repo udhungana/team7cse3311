@@ -42,6 +42,7 @@ namespace Carronade {
 			Vector2 vel = new Vector2(buildX, buildY);
 			if (vel != Vector2.Zero)
 				vel.Normalize();
+			//jumps forward.
 			if(vel != Vector2.Zero) {
 				rotation = (float) Math.Atan2(vel.Y, vel.X);
 				if (state.IsKeyDown(Keys.LeftShift)) {

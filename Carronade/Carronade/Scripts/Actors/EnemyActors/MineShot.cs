@@ -22,6 +22,7 @@ namespace Carronade {
 			SetVelocity(facing);
 			SetDamage(30);
 		}
+		//Mine arrows decelerate and chill where they stand, but have the unique property of expiring after a certain length of time.
 		public override void Update(GameTime gameTime) {
 			double curTime = gameTime.TotalGameTime.TotalSeconds;
 			if (birthTime == -1)

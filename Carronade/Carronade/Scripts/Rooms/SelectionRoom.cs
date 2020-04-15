@@ -20,12 +20,15 @@ namespace Carronade {
 			if (room.GetType().Equals(typeof(GameRoom))) {
 				GameRoom game = (GameRoom) room;
 				KeyboardState state = Keyboard.GetState();
+
+				//Selection Menu Logic. 1-3 for selecting a playertype
 				if (state.IsKeyDown(Keys.D1))
 					game.SetPlayerType(typeof(BasePlayerActor));
 				if (state.IsKeyDown(Keys.D2))
 					game.SetPlayerType(typeof(BlinkPlayerActor));
 				if (state.IsKeyDown(Keys.D3))
 					game.SetPlayerType(typeof(HunkerPlayerActor));
+				//Q or W for selecting an Arena and going into the Game Room
 				if (state.IsKeyDown(Keys.Q)) {
 					game.SetBuild(0);
 					game.Reset();
@@ -36,13 +39,13 @@ namespace Carronade {
 					game.Reset();
 					Game1.mainGame.SwitchRooms("GameRoom");
 				}
+				//Consume the keyboard update just incase there's a room transition.
 				Game1.mainGame.prevState = state;
 			}
 		}
-		//After the lights go out we need to update positions.
 		public override void LateUpdate(GameTime gameTime) {
 		}
-		//All actors will have a draw function but not every actor will necessarily use this.
+		//There's nothing to draw. Yet.
 		public override void Draw(SpriteBatch spriteBatch, GameTime gameTime) {
 			spriteBatch.Begin();
 			background.Draw(spriteBatch, Vector2.Zero, 0.0f);

@@ -5,6 +5,7 @@ using System;
 namespace Carronade {
 	//All "interactive" objects in the game will be some form of actor.
 
+	//This is really a combined Healthbar + Scorebar
 	public class HealthbarActor : Actor {
 		private Sprite backSprite;
 		private Sprite goldBack;
@@ -12,6 +13,7 @@ namespace Carronade {
 		private Sprite[] tubeSprites = new Sprite[10];
 		private Vector2 barOffset;
 		private Vector2 tubeOffset;
+		//What each tick on the ScoreBar should read
 		private int[] slotValues = new int[8];
 		public HealthbarActor(float x, float y, float r) : base(x, y, r) {
 
@@ -30,6 +32,7 @@ namespace Carronade {
 			barOffset = new Vector2(2, 2);
 			tubeOffset = new Vector2(16, -20);
 		}
+		//Calculates each ScoreBar slot
 		public override void Update(GameTime gameTime) {
 			int score = GameRoom.gameRoom.Score;
 			int divisor = 10000000;
@@ -47,11 +50,13 @@ namespace Carronade {
 		public override void Draw(SpriteBatch canvas) {
 			PlayerActor player;
 			if (GameRoom.gameRoom.player != null) {
+				//Special Drawing Rules for Invincibility
 				player = GameRoom.gameRoom.player;
 				if(player.invuln)
 					goldBack.Draw(canvas, position, 0.0f);
 				else
 					backSprite.Draw(canvas, position, 0.0f);
+				//Draw a fraction of the healthbar as health goes down.
 				Rectangle crop;
 				float totalSize = 156;
 				totalSize *= player.GetPercentMaxHealth();

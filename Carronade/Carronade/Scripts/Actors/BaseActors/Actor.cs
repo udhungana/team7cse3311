@@ -5,6 +5,7 @@ namespace Carronade {
 	//All "interactive" objects in the game will be some form of actor.
 
 	public abstract class Actor {
+		//Decreed by the design of the project, all Actors have these fundamental laws.
 		protected Vector2 position;
 		protected float rotation;
 		protected float layer;

@@ -24,6 +24,7 @@ namespace Carronade {
 			base.OnPickup(player, gameTime);
 			playerRef.SetInvuln(true);
 		}
+		//This is to prevent the Invulnerability buff from being overriden by other invulnerabilities by accident
 		public override void LateUpdate(GameTime gameTime) {
 			base.LateUpdate(gameTime);
 			if(playerRef != null)

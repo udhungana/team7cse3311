@@ -4,7 +4,9 @@ using System.Collections.Generic;
 namespace Carronade {
 
 	public abstract class BaseRoom {
+		//Rooms will have a collection of actors they managed and personally updated.
 		public List<Actor> actors { get; private set; }
+		//Updating a List while iterating through it is highly illegal. Here's our solution.
 		protected List<Actor> actorAddQueue { get; private set; }
 		protected List<Actor> actorDeleteQueue { get; private set; }
 		protected bool actorQueueUpdated = false;

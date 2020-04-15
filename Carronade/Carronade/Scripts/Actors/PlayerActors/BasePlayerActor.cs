@@ -42,6 +42,7 @@ namespace Carronade {
 				buildX -= 1;
 			if (state.IsKeyDown(Keys.D))
 				buildX += 1;
+			//If Shift is held down, go fast for as long as the duration doesn't end and the cooldown is, down.
 			if (state.IsKeyDown(Keys.LeftShift)) {
 				if(curTime < sprintStart) {
 					baseSpeed = 128 * 6;
@@ -52,6 +53,8 @@ namespace Carronade {
 				} else {
 					baseSpeed = 512.0f;
 				}
+			} else {
+				baseSpeed = 512.0f;
 			}
 			Vector2 vel = new Vector2(buildX, buildY);
 			if (vel != Vector2.Zero)
