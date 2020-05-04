@@ -8,6 +8,7 @@ Carronade is made on the Monogame 3.7.1 Framework, which is de .NET 4.6.1 framew
 #Compile Instruction
 
 The game is written in C# using framework software Monogame that runs on the .NET 4.6.1 framework, and is compiled with Microsoft Visual Studio.
+
 	1. You need to have Microsoft Visual Studio installed for this purpose. 
 	
 	2. First, clone the game directory from github (link provided below) to your local directory.
