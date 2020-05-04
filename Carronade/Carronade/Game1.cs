@@ -17,8 +17,10 @@ namespace Carronade {
 
 		public KeyboardState prevState;
 		private BaseRoom activeRoom;
+		public string prevRoom { get; private set; }
+		private string curRoom = "";
 		private Dictionary<string, BaseRoom> rooms;
-
+		public int highScore = 0;
 		XMLAssetBuilder builder;
 		public Viewport ViewPort { get {
 				return graphics.GraphicsDevice.Viewport;
@@ -55,8 +57,21 @@ namespace Carronade {
 			rooms.Add("GameRoom", new GameRoom());
 			rooms.Add("MainRoom", new MainRoom());
 			rooms.Add("SelectionRoom", new SelectionRoom());
+			//Loads old settings.
+			bool mute = false;
+			int setting = 10;
+			try {
+				string[] lines = System.IO.File.ReadAllLines("./savefile");
+				highScore = int.Parse(lines[0]);
+				setting = int.Parse(lines[1]);
+				mute = bool.Parse(lines[2]);
+			} catch (Exception e) { 
+				//Use defaults.
+			}
+			rooms.Add("SettingsRoom", new SettingsRoom(setting, mute));
 			//Start at the main menu.
 			activeRoom = rooms["MainRoom"];
+			curRoom = "MainRoom";
 		}
 		//The following function names make the intent and functionality of a room self-explanatory.
 		public BaseRoom GetActiveRoom() {
@@ -70,7 +85,9 @@ namespace Carronade {
 		}
 		public void SwitchRooms(string room) {
 			if(rooms.ContainsKey(room)) {
+				prevRoom = curRoom;
 				activeRoom = rooms[room];
+				curRoom = room;
 			}
 		}
 		/// <summary>
@@ -87,6 +104,8 @@ namespace Carronade {
 			builder.LoadAssets("canon");
 			builder.LoadAssets("healthbar");
 			builder.LoadAssets("powerups");
+			builder.LoadAssets("sounds");
+			
 		}
 		/// <summary>
 		/// UnloadContent will be called once per game and is the place to unload
@@ -118,6 +137,16 @@ namespace Carronade {
 		protected override void Draw(GameTime gameTime) {
 			if (activeRoom != null)
 				activeRoom.Draw(spriteBatch, gameTime);
+		}
+		public void ExitGame() {
+			SaveGame();
+			Exit();
+		}
+		//Saves the settings.
+		public void SaveGame() {
+			SettingsRoom room = (SettingsRoom) rooms["SettingsRoom"];
+			string[] lines = { highScore.ToString(), room.selection.ToString(), room.muted.ToString()};
+			System.IO.File.WriteAllLines("./savefile", lines);
 		}
 	}
 }

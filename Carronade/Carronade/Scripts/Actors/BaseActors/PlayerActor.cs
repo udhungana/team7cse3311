@@ -54,6 +54,9 @@ namespace Carronade {
 		}
 		//Then
 		public void Perish() {
+			//There is no previous highscore so just throw the player a bone.
+			if (Game1.mainGame.highScore == 0)
+				Game1.mainGame.highScore = GameRoom.gameRoom.Score;
 			Game1.mainGame.SwitchRooms("MainRoom");
 		}
 		#endregion
@@ -74,10 +77,13 @@ namespace Carronade {
 					//Collisions treat both objects as circle. Not the most accurate hit detection but computationally cheap and easier to write.
 					if (Math.Sqrt((xDist * xDist + yDist * yDist)) < 32) {
 						Damage(enem.damage);
-						if (invuln)
+						if (invuln) {
 							enem.OnKilled();
-						else
+							Sound.GetSound(1004).CreateInstance().Play();
+						} else {
 							enem.OnImpact();
+							Sound.GetSound(1003).CreateInstance().Play();
+						}
 					}
 				} else if(t.IsSubclassOf(typeof(PowerupActor))) {
 					PowerupActor pow = (PowerupActor) actor;

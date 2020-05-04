@@ -34,8 +34,8 @@ namespace Carronade {
 				directionToPlayer -= Math.Sign(directionToPlayer) * (float) Math.PI * 2;
 
 			//Denies PERFECT tracking of the player
-			rotation += directionToPlayer/20;
-			Vector2 facing = new Vector2(((float)Math.Cos(rotation)) * baseSpeed, ((float)Math.Sin(rotation)) * baseSpeed);
+			rotation += directionToPlayer/10;
+			Vector2 facing = new Vector2(((float) Math.Cos(rotation)) * baseSpeed, ((float)Math.Sin(rotation)) * baseSpeed);
 			SetVelocity(facing);
 		}
 		public override void LateUpdate(GameTime gameTime) {

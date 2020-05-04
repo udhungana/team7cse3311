@@ -31,6 +31,7 @@ namespace Carronade {
 							newAsset = BuildImage(asset);
 							break;
 						case "Sound":
+							newAsset = BuildSound(asset);
 							break;
 						case "AnimationSet":
 							newAsset = BuildAnimations(asset);

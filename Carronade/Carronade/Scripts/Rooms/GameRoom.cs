@@ -13,6 +13,12 @@ namespace Carronade {
 		private bool unpaused = true;
 		private Type createPlayer;
 		private Sprite background;
+		private Sprite pauseOverlay;
+		private Sprite highscore;
+		private Vector2 buttonOffset;
+		private UIButton editButton;
+		private UIButton exitButton;
+
 		public enum ROOMSETUP { CLASSIC = 0, TWO };
 		private ROOMSETUP build = ROOMSETUP.CLASSIC;
 		public int Score { get; private set; }
@@ -32,11 +38,22 @@ namespace Carronade {
 		public override void Initialize() {
 			base.Initialize();
 			background = new Sprite(0);
+			pauseOverlay = new Sprite(30);
+			highscore = new Sprite(31);
 			createPlayer = typeof(BasePlayerActor);
 			//actors.Add(new LoadingActor(0,0,0));
 			if (gameRoom == null) {
 				gameRoom = this;
 			}
+			buttonOffset = new Vector2(640 - 64, 128 + 32);
+			editButton = new UIButton(buttonOffset + new Vector2(0, 128), 8, SwitchSettings);
+			exitButton = new UIButton(buttonOffset + new Vector2(0, 256), 9, ReturnToMain);
+		}
+		public void SwitchSettings() {
+			Game1.mainGame.SwitchRooms("SettingsRoom");
+		}
+		public void ReturnToMain() {
+			Game1.mainGame.SwitchRooms("MainRoom");
 		}
 		public void BuildRoom() {
 			if(build == ROOMSETUP.CLASSIC) {
@@ -59,14 +76,14 @@ namespace Carronade {
 				RemoveActor(actor);
 			}
 			BuildRoom();
+			unpaused = true;
 			Score = 0;
 			TimeStart = -1;
 		}
 		//Actors have the ability to update (their position for instance) or recieve input
 		public override void Update(GameTime gameTime) {
 			//Mouse should only be visible on the Main Menu.
-			if (Game1.mainGame.IsMouseVisible)
-				Game1.mainGame.IsMouseVisible = false;
+			Game1.mainGame.IsMouseVisible = !unpaused;
 			if (TimeStart < 0)
 				TimeStart = gameTime.TotalGameTime.TotalSeconds;
 			KeyboardState state = Keyboard.GetState();
@@ -74,10 +91,6 @@ namespace Carronade {
 			if (state.IsKeyDown(Keys.P) && !previousState.IsKeyDown(
 				Keys.P)) {
 				unpaused = !unpaused;
-			}
-			if (state.IsKeyDown(Keys.Q) && !previousState.IsKeyDown(
-				Keys.Q) && !Game1.mainGame.prevState.IsKeyDown(Keys.Q)) {
-				Game1.mainGame.SwitchRooms("MainRoom");
 			}
 			if (state.IsKeyDown(Keys.R) && !previousState.IsKeyDown(
 				Keys.R)) {
@@ -104,6 +117,9 @@ namespace Carronade {
 					}
 					LateUpdate(gameTime);
 				}
+			} else {
+				editButton.Update(gameTime);
+				exitButton.Update(gameTime);
 			}
 			previousState = state;
 			double sTime = Math.Floor(TimeStart * 100) / 100;
@@ -125,8 +141,21 @@ namespace Carronade {
 			spriteBatch.Begin();
 			background.Draw(spriteBatch, Vector2.Zero, 0);
 			foreach (var actor in actors) {
-				if (actor.IsEnabled())
-					actor.Draw(spriteBatch);
+				if (actor.IsEnabled()) {
+					if (unpaused)
+						actor.Draw(spriteBatch);
+					else
+						actor.DrawStill(spriteBatch);
+				}
+			}
+			if(!unpaused) {
+				pauseOverlay.Draw(spriteBatch, Vector2.Zero, 0.0f);
+				editButton.GetSprite().Draw(spriteBatch, buttonOffset + new Vector2(0, 128), 0.0f);
+				exitButton.GetSprite().Draw(spriteBatch, buttonOffset + new Vector2(0, 256), 0.0f);
+			}
+			if(Score >= Game1.mainGame.highScore && Game1.mainGame.highScore != 0) {
+				Game1.mainGame.highScore = Score;
+				highscore.DrawCentered(spriteBatch, new Vector2(Game1.mainGame.ViewPort.Width / 2, 64), 0.0f);
 			}
 			spriteBatch.End();
 		}

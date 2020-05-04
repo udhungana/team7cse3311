@@ -48,18 +48,21 @@ namespace Carronade {
 				GameRoom.gameRoom.AddActor(new TurnShot(canonMuzzle, (float) (rotation + Math.PI / 8), 64.0f * 8));
 				lastTripleShot = gameTime.TotalGameTime.TotalSeconds + 5;
 				canonSprite.SetAnimation("idle");
-			//Every double, fire off 2
+				Sound.GetSound(1001).CreateInstance().Play();
+				//Every double, fire off 2
 			} else if (lastDoubleShot < curTime) {
 				GameRoom.gameRoom.AddActor(new AcceleratedShot(canonMuzzle, (float)(rotation - Math.PI / 3), 64.0f * 2));
 				GameRoom.gameRoom.AddActor(new AcceleratedShot(canonMuzzle, (float)(rotation + Math.PI / 3), 64.0f * 2));
 				GameRoom.gameRoom.AddActor(new MineShot(canonMuzzle, rotation, 64.0f * 7));
 				lastDoubleShot = gameTime.TotalGameTime.TotalSeconds + 2;
 				canonSprite.SetAnimation("idle");
-			//Every single, fire off one.
+				Sound.GetSound(1001).CreateInstance().Play();
+				//Every single, fire off one.
 			} else if (lastSingleShot < curTime) {
 				GameRoom.gameRoom.AddActor(new StraightShot(canonMuzzle, rotation, 64.0f * 7));
 				lastSingleShot = gameTime.TotalGameTime.TotalSeconds + 0.5f;
 				canonSprite.SetAnimation("idle");
+				Sound.GetSound(1001).CreateInstance().Play();
 			}
 			//Powerups are a coinflip for now
 			if (lastPowerUp < curTime) {
@@ -71,6 +74,7 @@ namespace Carronade {
 				}
 				lastPowerUp = curTime + 6.0f;
 				canonSprite.SetAnimation("idle");
+				Sound.GetSound(1002).CreateInstance().Play();
 			}
 			float closestShotTime = (float) Math.Min(lastTripleShot, Math.Min(lastSingleShot, lastDoubleShot));
 			//Plays an animation
@@ -79,7 +83,10 @@ namespace Carronade {
 			}
 		}
 		public override void Draw(SpriteBatch canvas) {
-			canonSprite.DrawCentered(canvas,position, rotation);
+			canonSprite.DrawCentered(canvas, position, rotation);
+		}
+		public override void DrawStill(SpriteBatch canvas) {
+			canonSprite.DrawCenteredStill(canvas, position, rotation);
 		}
 		public override Vector2 GetCenterPosition() {
 			return GetPosition();

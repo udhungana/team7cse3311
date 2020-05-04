@@ -57,10 +57,9 @@ namespace Carronade {
 				baseSpeed = 512.0f;
 			}
 			Vector2 vel = new Vector2(buildX, buildY);
-			if (vel != Vector2.Zero)
-				vel.Normalize();
 			if (vel != Vector2.Zero) {
-				rotation = (float)Math.Atan2(vel.Y, vel.X);
+				vel.Normalize();
+				rotation = (float) Math.Atan2(vel.Y, vel.X);
 			} else {
 				rotation = lastRot;
 			}

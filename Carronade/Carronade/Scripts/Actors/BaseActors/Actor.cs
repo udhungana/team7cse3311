@@ -46,6 +46,10 @@ namespace Carronade {
 		public abstract void LateUpdate(GameTime gameTime);
 		//All actors will have a draw function but not every actor will necessarily use this.
 		public abstract void Draw(SpriteBatch canvas);
+		//For most still sprites it'll just be the same as the base.
+		public virtual void DrawStill(SpriteBatch canvas) {
+			Draw(canvas);
+		}
 		public abstract Vector2 GetPosition();
 		public abstract Rectangle GetBounds();
 		public abstract Vector2 GetCenterPosition();

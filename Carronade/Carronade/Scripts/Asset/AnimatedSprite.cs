@@ -47,6 +47,11 @@ namespace Carronade {
 			GetActiveFrame();
 			canvas.Draw(text, position + center, activeFrame, Color.White, rotation, center, 1.0f, SpriteEffects.None, layer);
 		}
+		public void DrawCenteredStill(SpriteBatch canvas, Vector2 position, float rotation) {
+			Vector2 center = new Vector2(activeFrame.Width / 2, activeFrame.Height / 2);
+			GetActiveFrame();
+			canvas.Draw(text, position, activeFrame, Color.White, rotation, center, 1.0f, SpriteEffects.None, layer);
+		}
 
 		//BIG TODO: REDIRECT TO DRAWSTILL DURING PAUSING
 

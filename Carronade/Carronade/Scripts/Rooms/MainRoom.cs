@@ -8,10 +8,13 @@ namespace Carronade {
 	public class MainRoom : BaseRoom {
 		private Sprite background;
 		private Sprite logo;
-		private Sprite play;
 		private Vector2 offset;
 		private Vector2 playOffset;
 		private MouseState lastState;
+
+		private UIButton playButton;
+		private UIButton editButton;
+		private UIButton exitButton;
 		public MainRoom() : base() {
 			Initialize();
 		}
@@ -20,27 +23,35 @@ namespace Carronade {
 			base.Initialize();
 			background = new Sprite(0);
 			logo = new Sprite(1);
-			play = new Sprite(2);
 			offset = new Vector2(Game1.mainGame.ViewPort.Width/2, 100);
-			playOffset = new Vector2(Game1.mainGame.ViewPort.Width / 2 - play.GetBounds().Width/2, 256);
+			playButton = new UIButton(2, SelectRoom);
+			playOffset = new Vector2(Game1.mainGame.ViewPort.Width / 2 - playButton.GetBounds().Width / 2, 256);
+			playButton.SetPosition(playOffset);
+			editButton = new UIButton(playOffset + new Vector2(0, 128), 8, EditRoom);
+			exitButton = new UIButton(playOffset + new Vector2(0, 256), 9, Exit);
 		}
 		//Actors have the ability to update (their position for instance) or recieve input
 		public override void Update(GameTime gameTime) {
 			//Mouse should only be visible on the Main Menu.
-			if(!Game1.mainGame.IsMouseVisible)
+			if (!Game1.mainGame.IsMouseVisible)
 				Game1.mainGame.IsMouseVisible = true;
 			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-				Game1.mainGame.Exit();
-			MouseState mouseClick = Mouse.GetState();
-			//TODO: Create a proper button UI class (Actor?)
-			if (Mouse.GetState().X >= playOffset.X && Mouse.GetState().Y >= playOffset.Y) {
-				if(Mouse.GetState().X <= playOffset.X + play.GetBounds().Width && Mouse.GetState().Y <= playOffset.Y + play.GetBounds().Height) {
-					if (mouseClick.LeftButton == ButtonState.Pressed) {
-						Game1.mainGame.SwitchRooms("SelectionRoom");
-					}
-				}
-			}
-			lastState = mouseClick;
+				Game1.mainGame.ExitGame();
+			playButton.Update(gameTime);
+			editButton.Update(gameTime);
+			exitButton.Update(gameTime);
+		}
+		//Go to selection room
+		public void SelectRoom() {
+			Game1.mainGame.SwitchRooms("SelectionRoom");
+		}
+		//Go to settings room
+		public void EditRoom() {
+			Game1.mainGame.SwitchRooms("SettingsRoom");
+		}
+		//Gets out of dodge
+		public void Exit() {
+			Game1.mainGame.ExitGame();
 		}
 		public override void LateUpdate(GameTime gameTime) {
 		}
@@ -49,7 +60,9 @@ namespace Carronade {
 			spriteBatch.Begin();
 			background.Draw(spriteBatch, Vector2.Zero, 0.0f);
 			logo.DrawCentered(spriteBatch, offset, 0.0f);
-			play.Draw(spriteBatch, playOffset, 0.0f);
+			playButton.GetSprite().Draw(spriteBatch, playOffset, 0.0f);
+			editButton.GetSprite().Draw(spriteBatch, playOffset + new Vector2(0, 128), 0.0f);
+			exitButton.GetSprite().Draw(spriteBatch, playOffset + new Vector2(0, 256), 0.0f);
 			spriteBatch.End();
 		}
 	}

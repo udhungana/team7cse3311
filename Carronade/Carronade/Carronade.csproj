@@ -70,12 +70,16 @@
     <Compile Include="Scripts\Actors\UniqueActors\HealthbarActor.cs" />
     <Compile Include="Scripts\Asset\Asset.cs" />
     <Compile Include="Scripts\Asset\Animations.cs" />
+    <Compile Include="Scripts\Asset\Sound.cs" />
     <Compile Include="Scripts\Asset\Image.cs" />
     <Compile Include="Scripts\Asset\AnimatedSprite.cs" />
+    <Compile Include="Scripts\Rooms\SettingsRoom.cs" />
     <Compile Include="Scripts\Rooms\SelectionRoom.cs" />
     <Compile Include="Scripts\Rooms\MainRoom.cs" />
     <Compile Include="Scripts\Rooms\GameRoom.cs" />
     <Compile Include="Scripts\Rooms\BaseRoom.cs" />
+    <Compile Include="Scripts\UIElement\UIButton.cs" />
+    <Compile Include="Scripts\UIElement\UIElement.cs" />
     <Compile Include="Scripts\XMLAssetBuilder.cs" />
     <Compile Include="Scripts\Actors\BaseActors\Actor.cs" />
     <Compile Include="Scripts\Asset\Sprite.cs" />

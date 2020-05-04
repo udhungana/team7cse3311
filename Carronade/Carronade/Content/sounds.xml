@@ -1,0 +1,22 @@
+<asset>
+	<Sound>
+		<name>SquareWave</name>
+		<id>1000</id>
+	</Sound>
+	<Sound>
+		<name>Fire</name>
+		<id>1001</id>
+	</Sound>
+	<Sound>
+		<name>Powerup</name>
+		<id>1002</id>
+	</Sound>
+	<Sound>
+		<name>Hit</name>
+		<id>1003</id>
+	</Sound>
+	<Sound>
+		<name>InvulnHit</name>
+		<id>1004</id>
+	</Sound>
+</asset>
